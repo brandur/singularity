@@ -1,0 +1,6 @@
+= content main
+  h1 Home
+  p This is the home page.
+  ul
+    li
+      a href=/about About

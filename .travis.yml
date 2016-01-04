@@ -1,0 +1,27 @@
+env:
+  global:
+    - S3_BUCKET=singularity.brandur.org
+
+    # $AWS_ACCESS_KEY_ID
+    - secure: HR577vOdWB3YEvtTGtuZHXWI7f1L2z7+BrIveSIFaikG9InmECJgjQGdQjIYfB1X0E1kVlUtXaq+OdFx9trWLZgtNK1NNRv0BSd+wGJqIBjk3j9A64x6pGl1YC10gxFN18Me52XyhDYFeE1e1Mi/ZY6R+14RshOcc1mV/Q5LNjIYywqN+zln7KHVsc402z1yqqzMF1nKdw0Cin67lqYKYi8Rs322F+sL3VId4rzpT8qMu2jOHqrzm2fKX+2sMMTafS7+5oR6oPp9sKOZDhvbEYhZvf2dfe4DsvAluIxcVi4/fSXkjfMAsSZoFz37n5ozXw+XXfIib/hVMy25MFc/3IUKAuTvORqDT6+Ib2oCdwKOsGrcLB7FKyR13yjKbosqlnXUSFWwUBALzhIDEoJ4VLhexlHmsOYtG/arbDnlTswq3gN3zjmJtcQxcvgQkdbCIrnro+z/6mcOJNQLqV4QIjU5sM4m0S7dB6SRfzGwHc9N/6XXKWVWimJ73HJfWpMXs4uJcExBcKKZzR6cP2mlIbSr1GKdzYHnuMEVJuLvZ3heZ7stT822/nG1dAQ5xmo+w5kxrGEUTlBhvOa8R2zvWQbAtn3cFVzAecIefKQU59yr0cD4u+bMpEsoeuZ2eY4NC5XBURlgRKBXHb+GFqfy7LIc2laqJfZoOIWRJ3cPTbM=
+
+    # $AWS_SECRET_ACCESS_KEY
+    - secure: svmpmR0oKcoPTVr7BAL6tYyO4FoFEkL4f4WMQN8ybw3bIUc/ie9y607ID2cXuTJL769SN+gczZe259NpQTnMK0y7DPN2d3S3FTq5+CSAJJ3HnNNHNfRU7hkgA1PLAIpCXi2DBVS63iwznwWgBG5yDkUNd7pV6p8r8UbJSNBNua7XyYXLOXvW6MP8H+0h8Kjm3Ds8Xr+WiypElMJLZSneUoyJvrqOkKPT98PILuoOCMutTYNRRKGl10Nfy2zWJK3429VGGvDDhngp8ETG9/exlG40mYShCOEjugkZEvBDrF+i/ENTH17eUJJIH3Jlq2KKvQvdHC1ULft5DpaRw9U/u0aTKEphfP7qla2hoQ9tYalGHFsJX0SPslyN0vtRKILhzXFmBWTKgXQU2FKY8ud6Dvew2UIUekWSBODYL3X3kX1lyaYqQhq6OpKT/NVR22Ga8VvEQhptPefzwcAaOW1zbJLZXP3/TW96Ce2fqALx9BCcEf9G49dDQtb9/rt8nkvh4Ihzb71ZJFs1EU+W39Aw5VUONX/HQ6GdAnXbFiDQkLBwJfHMFfkOjWUWqFnKiqidhHEvGcuJunfuGG2BmKYhisz9Av4BCecnnkGBp/ZWZj30wCWs0kv/rNub6SA6MILdpCq2UDEws9lNKE9g2cutQEZsejiA+ATUNZjNqXNe/XY=
+
+go:
+  - tip
+
+install:
+  - pip install --user awscli
+
+language: go
+
+notifications:
+  email:
+    on_success: never
+
+script:
+  - make build deploy
+
+# magic word to use faster/newer container-based architecture
+sudo: false
