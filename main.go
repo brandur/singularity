@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -17,14 +18,14 @@ import (
 const (
 	ArticlesDir = "./articles/"
 	AssetsDir   = "./assets/"
-	Concurrency = 10
 	LayoutsDir  = "./layouts/"
 	PagesDir    = "./pages/"
 	TargetDir   = "./public/"
 )
 
 var (
-	verbose = false
+	concurrency = 10
+	verbose     = false
 )
 
 func main() {
@@ -32,14 +33,6 @@ func main() {
 	defer func() {
 		fmt.Printf("Site built in %v\n", time.Now().Sub(start))
 	}()
-
-	if os.Getenv("VERBOSE") == "true" {
-		verbose = true
-	}
-
-	if verbose {
-		fmt.Printf("Starting build with concurrency %v\n", Concurrency)
-	}
 
 	// We should probably have a more complete approach to error handling here,
 	// but for now just error on the first problem.
@@ -52,6 +45,23 @@ func main() {
 		}
 	}()
 
+	if os.Getenv("CONCURRENCY") != "" {
+		c, err := strconv.Atoi(os.Getenv("CONCURRENCY"))
+		errors <- err
+		if c < 1 {
+			errors <- fmt.Errorf("CONCURRENCY must be >= 1")
+		}
+		concurrency = c
+	}
+
+	if os.Getenv("VERBOSE") == "true" {
+		verbose = true
+	}
+
+	if verbose {
+		fmt.Printf("Starting build with concurrency %v\n", concurrency)
+	}
+
 	// create an output directory
 	err := os.MkdirAll(TargetDir, 0755)
 	errors <- err
@@ -62,7 +72,7 @@ func main() {
 	// that's not a big deal
 	jobs := make(chan func() error, 1000)
 
-	for i := 0; i < Concurrency; i++ {
+	for i := 0; i < concurrency; i++ {
 		go func() {
 			for job := range jobs {
 				errors <- job()
