@@ -25,6 +25,9 @@ endif
 save-deps:
 	GO15VENDOREXPERIMENT=1 godep save ./...
 
+serve:
+	GO15VENDOREXPERIMENT=1 go run main.go serve
+
 test:
 	GO15VENDOREXPERIMENT=1 go test
 

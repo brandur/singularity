@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -26,24 +27,37 @@ const (
 
 var (
 	concurrency = 10
+	errors      = make(chan error)
 	verbose     = false
 )
 
 func main() {
-	start := time.Now()
-	defer func() {
-		fmt.Printf("Site built in %v\n", time.Now().Sub(start))
-	}()
-
 	// We should probably have a more complete approach to error handling here,
 	// but for now just error on the first problem.
-	errors := make(chan error)
 	go func() {
 		for err := range errors {
 			if err != nil {
 				panic(err)
 			}
 		}
+	}()
+
+	// create an output directory (needed for both build and serve)
+	err := os.MkdirAll(TargetDir, 0755)
+	errors <- err
+
+	// always use the last argument in case we're using `go run`
+	if os.Args[len(os.Args)-1] == "serve" {
+		serve()
+	} else {
+		build()
+	}
+}
+
+func build() {
+	start := time.Now()
+	defer func() {
+		fmt.Printf("Site built in %v\n", time.Now().Sub(start))
 	}()
 
 	if os.Getenv("CONCURRENCY") != "" {
@@ -62,10 +76,6 @@ func main() {
 	if verbose {
 		fmt.Printf("Starting build with concurrency %v\n", concurrency)
 	}
-
-	// create an output directory
-	err := os.MkdirAll(TargetDir, 0755)
-	errors <- err
 
 	var wg sync.WaitGroup
 
@@ -100,6 +110,22 @@ func main() {
 	}
 
 	wg.Wait()
+}
+
+func serve() {
+	port := 5001
+	if os.Getenv("PORT") != "" {
+		p, err := strconv.Atoi(os.Getenv("PORT"))
+		errors <- err
+		if p < 1 {
+			errors <- fmt.Errorf("PORT must be >= 1")
+		}
+		port = p
+	}
+
+	fmt.Printf("Serving '%v' on port %v\n", path.Clean(TargetDir), port)
+	err := http.ListenAndServe(":"+strconv.Itoa(port), http.FileServer(http.Dir(TargetDir)))
+	errors <- err
 }
 
 func generateArticleJobs() ([]func() error, error) {

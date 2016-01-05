@@ -20,6 +20,10 @@ Rebuild on changes in content directories using fswatch:
     brew install fswatch
     make watch
 
+Serve the built content using:
+
+    make serve
+
 ## Deployment
 
 The repository will deploy to S3 automatically from the Travis build when
