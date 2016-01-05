@@ -16,7 +16,7 @@ import (
 const (
 	ArticlesDir = "./articles/"
 	AssetsDir   = "./assets/"
-	LayoutDir   = "./layout/"
+	LayoutsDir  = "./layouts/"
 	PagesDir    = "./pages/"
 	TargetDir   = "./public/"
 )
@@ -88,7 +88,7 @@ func renderArticles() error {
 		}
 		rendered := renderMarkdown(source)
 
-		template, err := ace.Load(LayoutDir+"main", LayoutDir+"article", nil)
+		template, err := ace.Load(LayoutsDir+"main", LayoutsDir+"article", nil)
 		if err != nil {
 			return err
 		}
@@ -144,7 +144,7 @@ func renderPages() error {
 		// ace.Load doesn't like to take .ace extensions anyway
 		pageFile := trimExtension(fileInfo.Name())
 
-		template, err := ace.Load(LayoutDir+"main", PagesDir+pageFile, nil)
+		template, err := ace.Load(LayoutsDir+"main", PagesDir+pageFile, nil)
 		if err != nil {
 			return err
 		}
