@@ -17,6 +17,7 @@ import (
 const (
 	ArticlesDir = "./articles/"
 	AssetsDir   = "./assets/"
+	Concurrency = 10
 	LayoutsDir  = "./layouts/"
 	PagesDir    = "./pages/"
 	TargetDir   = "./public/"
@@ -36,54 +37,54 @@ func main() {
 		verbose = true
 	}
 
+	// We should probably have a more complete approach to error handling here,
+	// but for now just error on the first problem.
+	errors := make(chan error)
+	go func() {
+		for err := range errors {
+			if err != nil {
+				panic(err)
+			}
+		}
+	}()
+
 	// create an output directory
 	err := os.MkdirAll(TargetDir, 0755)
-	if err != nil {
-		panic(err)
-	}
+	errors <- err
 
-	articleJobs, err := generateArticleJobs()
-	if err != nil {
-		panic(err)
-	}
+	var wg sync.WaitGroup
 
-	pageJobs, err := generatePageJobs()
-	if err != nil {
-		panic(err)
+	// note that if this buffered channel fills, the producers might block, but
+	// that's not a big deal
+	jobs := make(chan func() error, 1000)
+
+	for i := 0; i < Concurrency; i++ {
+		go func() {
+			for job := range jobs {
+				errors <- job()
+				wg.Done()
+			}
+		}()
 	}
 
 	// we build jobs for everything and then just run it all in parallel
-	var jobs []func() error
-	jobs = append(jobs, func() error {
+	wg.Add(1)
+	jobs <- func() error {
 		return linkAssets()
-	})
-	jobs = append(jobs, articleJobs...)
-	jobs = append(jobs, pageJobs...)
-
-	errors := make([]error, len(jobs))
-
-	var wg sync.WaitGroup
-	for i, job := range jobs {
-		wg.Add(1)
-
-		// be careful with closures in loops
-		localJob := job
-
-		go func() {
-			defer wg.Done()
-
-			// avoiding an append() keeps this safe between goroutines
-			errors[i] = localJob()
-		}()
 	}
+
+	articleJobs, err := generateArticleJobs()
+	errors <- err
+
+	pageJobs, err := generatePageJobs()
+	errors <- err
+
+	wg.Add(len(articleJobs) + len(pageJobs))
+	for _, job := range append(articleJobs, pageJobs...) {
+		jobs <- job
+	}
+
 	wg.Wait()
-
-	// should probably have a more complete approach to error handling here
-	for _, err := range errors {
-		if err != nil {
-			panic(err)
-		}
-	}
 }
 
 func generateArticleJobs() ([]func() error, error) {
