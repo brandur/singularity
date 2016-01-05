@@ -37,6 +37,10 @@ func main() {
 		verbose = true
 	}
 
+	if verbose {
+		fmt.Printf("Starting build with concurrency %v\n", Concurrency)
+	}
+
 	// We should probably have a more complete approach to error handling here,
 	// but for now just error on the first problem.
 	errors := make(chan error)
