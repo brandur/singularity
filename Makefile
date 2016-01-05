@@ -1,14 +1,17 @@
+# The name of the Go executable.
+bin = singularity
+
 all: clean compile build
 
 build:
-	./singularity
+	./$(bin)
 
 clean:
 	mkdir -p public/
 	rm -f -r public/*
 
 compile:
-	GO15VENDOREXPERIMENT=1 go build -o singularity
+	GO15VENDOREXPERIMENT=1 go build -o $(bin)
 
 deploy: build
 # Note that AWS_ACCESS_KEY_ID will only be set for builds on the master
@@ -29,7 +32,7 @@ save-deps:
 	GO15VENDOREXPERIMENT=1 godep save ./...
 
 serve:
-	./singularity serve
+	./$(bin) serve
 
 test:
 	GO15VENDOREXPERIMENT=1 go test
