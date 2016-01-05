@@ -1,11 +1,14 @@
-all: clean build
+all: clean compile build
 
 build:
-	GO15VENDOREXPERIMENT=1 go run main.go
+	./singularity
 
 clean:
 	mkdir -p public/
 	rm -f -r public/*
+
+compile:
+	GO15VENDOREXPERIMENT=1 go build -o singularity
 
 deploy: build
 # Note that AWS_ACCESS_KEY_ID will only be set for builds on the master
@@ -26,7 +29,7 @@ save-deps:
 	GO15VENDOREXPERIMENT=1 godep save ./...
 
 serve:
-	GO15VENDOREXPERIMENT=1 go run main.go serve
+	./singularity serve
 
 test:
 	GO15VENDOREXPERIMENT=1 go test
