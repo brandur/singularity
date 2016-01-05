@@ -24,6 +24,11 @@ Serve the built content using:
 
     make serve
 
+Or do both using forego:
+
+    go get -u github.com/ddollar/forego
+    forego start
+
 ## Deployment
 
 The repository will deploy to S3 automatically from the Travis build when
