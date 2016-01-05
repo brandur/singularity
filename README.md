@@ -13,6 +13,13 @@ Build with:
 
 The results will appear in `public/`.
 
+## Development
+
+Rebuild on changes in content directories using fswatch:
+
+    brew install fswatch
+    make watch
+
 ## Deployment
 
 The repository will deploy to S3 automatically from the Travis build when

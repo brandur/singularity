@@ -27,3 +27,6 @@ save-deps:
 
 test:
 	GO15VENDOREXPERIMENT=1 go test
+
+watch:
+	fswatch -o articles/ assets/ layouts/ pages/ | xargs -n1 -I{} make build
