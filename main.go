@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -46,11 +47,20 @@ func main() {
 	err := os.MkdirAll(TargetDir, 0755)
 	errors <- err
 
-	// always use the last argument in case we're using `go run`
-	if os.Args[len(os.Args)-1] == "serve" {
+	flag.Parse()
+	switch flag.Arg(0) {
+	case "serve":
 		serve()
-	} else {
+	case "build":
+	case "":
 		build()
+	default:
+		fmt.Printf("usage: %v <command>\n", path.Clean(os.Args[0]))
+		fmt.Printf("\n")
+		fmt.Printf("commands:\n")
+		fmt.Printf("    build    Build static site to '%v'\n", path.Clean(TargetDir))
+		fmt.Printf("    serve    Serve static site over HTTP\n")
+		os.Exit(1)
 	}
 }
 
