@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -147,7 +148,7 @@ func linkAssets() error {
 		fmt.Printf("Linking assets directory\n")
 	}
 
-	err := os.RemoveAll(TargetDir + AssetsDir)
+	err := os.RemoveAll(TargetDir + path.Clean(AssetsDir))
 	if err != nil {
 		return err
 	}
