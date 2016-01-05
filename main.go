@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/russross/blackfriday"
 	"github.com/yosssi/ace"
@@ -20,6 +22,11 @@ const (
 )
 
 func main() {
+	start := time.Now()
+	defer func() {
+		fmt.Printf("Site built in %v\n", time.Now().Sub(start))
+	}()
+
 	// create an output directory
 	err := os.MkdirAll(TargetDir, 0755)
 	if err != nil {
