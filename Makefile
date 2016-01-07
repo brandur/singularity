@@ -11,7 +11,7 @@ clean:
 	rm -f -r public/*
 
 compile:
-	GO15VENDOREXPERIMENT=1 go build -o $(bin)
+	GO15VENDOREXPERIMENT=1 time go build -o $(bin)
 
 deploy: build
 # Note that AWS_ACCESS_KEY_ID will only be set for builds on the master
@@ -37,5 +37,8 @@ serve:
 test:
 	GO15VENDOREXPERIMENT=1 go test
 
-watch:
+watch-build:
 	fswatch -o articles/ assets/ layouts/ pages/ | xargs -n1 -I{} make build
+
+watch-compile:
+	fswatch -o main.go | xargs -n1 -I{} make compile

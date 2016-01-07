@@ -18,7 +18,7 @@ The results will appear in `public/`.
 Rebuild on changes in content directories using fswatch:
 
     brew install fswatch
-    make watch
+    make watch-build
 
 Serve the built content using:
 
