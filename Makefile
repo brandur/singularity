@@ -11,7 +11,7 @@ clean:
 	rm -f -r public/*
 
 compile:
-	GO15VENDOREXPERIMENT=1 go build -o $(bin)
+	go build -o $(bin)
 
 deploy: build
 # Note that AWS_ACCESS_KEY_ID will only be set for builds on the master
@@ -29,13 +29,13 @@ ifdef AWS_ACCESS_KEY_ID
 endif
 
 save-deps:
-	GO15VENDOREXPERIMENT=1 godep save ./...
+	godep save ./...
 
 serve:
 	./$(bin) serve
 
 test:
-	GO15VENDOREXPERIMENT=1 go test
+	go test
 
 watch:
 	fswatch -o articles/ assets/ layouts/ pages/ | xargs -n1 -I{} make build
