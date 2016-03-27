@@ -2,6 +2,8 @@ package singularity
 
 import (
 	"os"
+
+	log "github.com/Sirupsen/logrus"
 )
 
 const (
@@ -26,4 +28,30 @@ const (
 // CreateTargetDir creates TargetDir if it doesn't already exist.
 func CreateTargetDir() error {
 	return os.MkdirAll(TargetDir, 0755)
+}
+
+// InitLog initializes logging for singularity programs.
+func InitLog(verbose bool) {
+	log.SetFormatter(&plainFormatter{})
+
+	if verbose {
+		log.SetLevel(log.DebugLevel)
+	}
+}
+
+// plainFormatter is a logrus formatter that displays text in a much more
+// simple fashion that's more suitable as CLI output.
+type plainFormatter struct {
+}
+
+// Format takes a logrus.Entry and returns bytes that are suitable for log
+// output.
+func (f *plainFormatter) Format(entry *log.Entry) ([]byte, error) {
+	bytes := []byte(entry.Message + "\n")
+
+	if entry.Level == log.DebugLevel {
+		bytes = append([]byte("DEBUG: "), bytes...)
+	}
+
+	return bytes, nil
 }

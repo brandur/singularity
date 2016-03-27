@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"path"
 	"strconv"
@@ -11,10 +10,6 @@ import (
 	"github.com/joeshaw/envdecode"
 )
 
-var llog = log.WithFields(log.Fields{
-	"prefix": "serve",
-})
-
 // Conf contains configuration information for the command.
 type Conf struct {
 	// Port is the port on which the command will serve the site over HTTP.
@@ -22,25 +17,27 @@ type Conf struct {
 }
 
 func main() {
+	singularity.InitLog(false)
+
 	var conf Conf
 	err := envdecode.Decode(&conf)
 	if err != nil {
-		llog.Fatal(err)
+		log.Fatal(err)
 	}
 
 	err = singularity.CreateTargetDir()
 	if err != nil {
-		llog.Fatal(err)
+		log.Fatal(err)
 	}
 
 	err = serve(conf.Port)
 	if err != nil {
-		llog.Fatal(err)
+		log.Fatal(err)
 	}
 }
 
 func serve(port int) error {
-	fmt.Printf("Serving '%v' on port %v\n", path.Clean(singularity.TargetDir), port)
+	log.Info("Serving '%v' on port %v\n", path.Clean(singularity.TargetDir), port)
 
 	handler := http.FileServer(http.Dir(singularity.TargetDir))
 	return http.ListenAndServe(":"+strconv.Itoa(port), handler)

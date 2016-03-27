@@ -21,12 +21,7 @@ import (
 var (
 	concurrency = 10
 	errors      = make(chan error)
-	verbose     = false
 )
-
-var llog = log.WithFields(log.Fields{
-	"prefix": "build",
-})
 
 func main() {
 	// We should probably have a more complete approach to error handling here,
@@ -34,7 +29,7 @@ func main() {
 	go func() {
 		for err := range errors {
 			if err != nil {
-				llog.Fatal(err)
+				log.Fatal(err)
 			}
 		}
 	}()
@@ -46,10 +41,12 @@ func main() {
 }
 
 func build() {
-	start := time.Now()
-	defer func() {
-		fmt.Printf("Site built in %v\n", time.Now().Sub(start))
-	}()
+	var verbose bool
+	if os.Getenv("VERBOSE") == "true" {
+		verbose = true
+	}
+
+	singularity.InitLog(verbose)
 
 	if os.Getenv("CONCURRENCY") != "" {
 		c, err := strconv.Atoi(os.Getenv("CONCURRENCY"))
@@ -60,13 +57,12 @@ func build() {
 		concurrency = c
 	}
 
-	if os.Getenv("VERBOSE") == "true" {
-		verbose = true
-	}
+	start := time.Now()
+	defer func() {
+		log.Infof("Site built in %v", time.Now().Sub(start))
+	}()
 
-	if verbose {
-		fmt.Printf("Starting build with concurrency %v\n", concurrency)
-	}
+	log.Debugf("Starting build with concurrency %v", concurrency)
 
 	var wg sync.WaitGroup
 
@@ -145,9 +141,7 @@ func generatePageJobs() ([]func() error, error) {
 }
 
 func linkAssets() error {
-	if verbose {
-		fmt.Printf("Linking assets directory\n")
-	}
+	log.Debugf("Linking assets directory")
 
 	err := os.RemoveAll(singularity.TargetDir + path.Clean(singularity.AssetsDir))
 	if err != nil {
@@ -175,9 +169,7 @@ func linkAssets() error {
 }
 
 func renderArticle(articleFile string) error {
-	if verbose {
-		fmt.Printf("Rendered article '%v'\n", articleFile)
-	}
+	log.Debugf("Rendered article '%v'", articleFile)
 
 	source, err := ioutil.ReadFile(singularity.ArticlesDir + articleFile)
 	if err != nil {
@@ -231,9 +223,7 @@ func renderMarkdown(source []byte) []byte {
 }
 
 func renderPage(pageFile string) error {
-	if verbose {
-		fmt.Printf("Rendered page '%v'\n", pageFile)
-	}
+	log.Debugf("Rendered page '%v'", pageFile)
 
 	template, err := ace.Load(singularity.LayoutsDir+"main", singularity.PagesDir+pageFile, nil)
 	if err != nil {
