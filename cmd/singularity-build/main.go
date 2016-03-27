@@ -2,10 +2,8 @@ package main
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -14,16 +12,10 @@ import (
 	"sync"
 	"time"
 
+	log "github.com/Sirupsen/logrus"
+	"github.com/brandur/singularity"
 	"github.com/russross/blackfriday"
 	"github.com/yosssi/ace"
-)
-
-const (
-	articlesDir = "./articles/"
-	assetsDir   = "./assets/"
-	layoutsDir  = "./layouts/"
-	pagesDir    = "./pages/"
-	targetDir   = "./public/"
 )
 
 var (
@@ -32,36 +24,25 @@ var (
 	verbose     = false
 )
 
+var llog = log.WithFields(log.Fields{
+	"prefix": "build",
+})
+
 func main() {
 	// We should probably have a more complete approach to error handling here,
 	// but for now just error on the first problem.
 	go func() {
 		for err := range errors {
 			if err != nil {
-				panic(err)
+				llog.Fatal(err)
 			}
 		}
 	}()
 
-	// create an output directory (needed for both build and serve)
-	err := os.MkdirAll(targetDir, 0755)
+	err := singularity.CreateTargetDir()
 	errors <- err
 
-	flag.Parse()
-	switch flag.Arg(0) {
-	case "serve":
-		serve()
-	case "build":
-	case "":
-		build()
-	default:
-		fmt.Printf("usage: %v <command>\n", path.Clean(os.Args[0]))
-		fmt.Printf("\n")
-		fmt.Printf("commands:\n")
-		fmt.Printf("    build    Build static site to '%v'\n", path.Clean(targetDir))
-		fmt.Printf("    serve    Serve static site over HTTP\n")
-		os.Exit(1)
-	}
+	build()
 }
 
 func build() {
@@ -122,24 +103,8 @@ func build() {
 	wg.Wait()
 }
 
-func serve() {
-	port := 5001
-	if os.Getenv("PORT") != "" {
-		p, err := strconv.Atoi(os.Getenv("PORT"))
-		errors <- err
-		if p < 1 {
-			errors <- fmt.Errorf("PORT must be >= 1")
-		}
-		port = p
-	}
-
-	fmt.Printf("Serving '%v' on port %v\n", path.Clean(targetDir), port)
-	err := http.ListenAndServe(":"+strconv.Itoa(port), http.FileServer(http.Dir(targetDir)))
-	errors <- err
-}
-
 func generateArticleJobs() ([]func() error, error) {
-	files, err := ioutil.ReadDir(articlesDir)
+	files, err := ioutil.ReadDir(singularity.ArticlesDir)
 	if err != nil {
 		return nil, err
 	}
@@ -159,7 +124,7 @@ func generateArticleJobs() ([]func() error, error) {
 }
 
 func generatePageJobs() ([]func() error, error) {
-	files, err := ioutil.ReadDir(pagesDir)
+	files, err := ioutil.ReadDir(singularity.PagesDir)
 	if err != nil {
 		return nil, err
 	}
@@ -184,19 +149,19 @@ func linkAssets() error {
 		fmt.Printf("Linking assets directory\n")
 	}
 
-	err := os.RemoveAll(targetDir + path.Clean(assetsDir))
+	err := os.RemoveAll(singularity.TargetDir + path.Clean(singularity.AssetsDir))
 	if err != nil {
 		return err
 	}
 
 	// we use absolute paths for source and destination because not doing so
 	// can result in some weird symbolic link inception
-	source, err := filepath.Abs(assetsDir)
+	source, err := filepath.Abs(singularity.AssetsDir)
 	if err != nil {
 		return err
 	}
 
-	dest, err := filepath.Abs(targetDir + assetsDir)
+	dest, err := filepath.Abs(singularity.TargetDir + singularity.AssetsDir)
 	if err != nil {
 		return err
 	}
@@ -214,18 +179,18 @@ func renderArticle(articleFile string) error {
 		fmt.Printf("Rendered article '%v'\n", articleFile)
 	}
 
-	source, err := ioutil.ReadFile(articlesDir + articleFile)
+	source, err := ioutil.ReadFile(singularity.ArticlesDir + articleFile)
 	if err != nil {
 		return err
 	}
 	rendered := renderMarkdown(source)
 
-	template, err := ace.Load(layoutsDir+"main", layoutsDir+"article", nil)
+	template, err := ace.Load(singularity.LayoutsDir+"main", singularity.LayoutsDir+"article", nil)
 	if err != nil {
 		return err
 	}
 
-	file, err := os.Create(targetDir + trimExtension(articleFile))
+	file, err := os.Create(singularity.TargetDir + trimExtension(articleFile))
 	if err != nil {
 		return err
 	}
@@ -270,12 +235,12 @@ func renderPage(pageFile string) error {
 		fmt.Printf("Rendered page '%v'\n", pageFile)
 	}
 
-	template, err := ace.Load(layoutsDir+"main", pagesDir+pageFile, nil)
+	template, err := ace.Load(singularity.LayoutsDir+"main", singularity.PagesDir+pageFile, nil)
 	if err != nil {
 		return err
 	}
 
-	file, err := os.Create(targetDir + pageFile)
+	file, err := os.Create(singularity.TargetDir + pageFile)
 	if err != nil {
 		return err
 	}

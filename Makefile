@@ -1,10 +1,7 @@
-# The name of the Go executable.
-bin = singularity
-
-all: clean compile test vet lint check-gofmt build
+all: clean install test vet lint check-gofmt build
 
 build:
-	./$(bin)
+	$(GOPATH)/bin/singularity-build
 
 check-gofmt:
 	scripts/check_gofmt.sh
@@ -12,9 +9,6 @@ check-gofmt:
 clean:
 	mkdir -p public/
 	rm -f -r public/*
-
-compile:
-	go build -o $(bin)
 
 deploy: build
 # Note that AWS_ACCESS_KEY_ID will only be set for builds on the master
@@ -33,8 +27,10 @@ else
 	# No AWS access key. Skipping deploy.
 endif
 
+install:
+	go install $(shell go list ./... | grep -v '/vendor/')
+
 lint:
-	# Use a full path here for the benefit of Travis.
 	$(GOPATH)/bin/golint
 
 	# Hack to workaround the fact that Golint doesn't produce a non-zero exit
@@ -45,14 +41,15 @@ lint:
 	#
 	test -z "$$(golint .)"
 
-save-deps:
-	godep save ./...
+save:
+	#godep save ./...
+	godep save $(shell go list ./... | grep -v '/vendor/')
 
 serve:
-	./$(bin) serve
+	$(GOPATH)/bin/singularity-serve
 
 test:
-	go test
+	go test $(shell go list ./... | grep -v '/vendor/')
 
 vet:
 	go vet
