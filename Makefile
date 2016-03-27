@@ -32,7 +32,8 @@ ifdef AWS_ACCESS_KEY_ID
 endif
 
 lint:
-	golint
+	# Use a full path here for the benefit of Travis.
+	$(GOPATH)/bin/golint
 
 	# Hack to workaround the fact that Golint doesn't produce a non-zero exit
 	# code on failure because Go Core team is always right and everyone else is
