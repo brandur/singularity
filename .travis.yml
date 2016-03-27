@@ -13,7 +13,7 @@ go:
   #- tip
 
 before_install:
-  - github.com/golang/lint/golint
+  - go get -u github.com/golang/lint/golint
 
 install:
   - pip install --user awscli
