@@ -19,11 +19,11 @@ import (
 )
 
 const (
-	ArticlesDir = "./articles/"
-	AssetsDir   = "./assets/"
-	LayoutsDir  = "./layouts/"
-	PagesDir    = "./pages/"
-	TargetDir   = "./public/"
+	articlesDir = "./articles/"
+	assetsDir   = "./assets/"
+	layoutsDir  = "./layouts/"
+	pagesDir    = "./pages/"
+	targetDir   = "./public/"
 )
 
 var (
@@ -44,7 +44,7 @@ func main() {
 	}()
 
 	// create an output directory (needed for both build and serve)
-	err := os.MkdirAll(TargetDir, 0755)
+	err := os.MkdirAll(targetDir, 0755)
 	errors <- err
 
 	flag.Parse()
@@ -58,7 +58,7 @@ func main() {
 		fmt.Printf("usage: %v <command>\n", path.Clean(os.Args[0]))
 		fmt.Printf("\n")
 		fmt.Printf("commands:\n")
-		fmt.Printf("    build    Build static site to '%v'\n", path.Clean(TargetDir))
+		fmt.Printf("    build    Build static site to '%v'\n", path.Clean(targetDir))
 		fmt.Printf("    serve    Serve static site over HTTP\n")
 		os.Exit(1)
 	}
@@ -133,13 +133,13 @@ func serve() {
 		port = p
 	}
 
-	fmt.Printf("Serving '%v' on port %v\n", path.Clean(TargetDir), port)
-	err := http.ListenAndServe(":"+strconv.Itoa(port), http.FileServer(http.Dir(TargetDir)))
+	fmt.Printf("Serving '%v' on port %v\n", path.Clean(targetDir), port)
+	err := http.ListenAndServe(":"+strconv.Itoa(port), http.FileServer(http.Dir(targetDir)))
 	errors <- err
 }
 
 func generateArticleJobs() ([]func() error, error) {
-	files, err := ioutil.ReadDir(ArticlesDir)
+	files, err := ioutil.ReadDir(articlesDir)
 	if err != nil {
 		return nil, err
 	}
@@ -159,7 +159,7 @@ func generateArticleJobs() ([]func() error, error) {
 }
 
 func generatePageJobs() ([]func() error, error) {
-	files, err := ioutil.ReadDir(PagesDir)
+	files, err := ioutil.ReadDir(pagesDir)
 	if err != nil {
 		return nil, err
 	}
@@ -184,19 +184,19 @@ func linkAssets() error {
 		fmt.Printf("Linking assets directory\n")
 	}
 
-	err := os.RemoveAll(TargetDir + path.Clean(AssetsDir))
+	err := os.RemoveAll(targetDir + path.Clean(assetsDir))
 	if err != nil {
 		return err
 	}
 
 	// we use absolute paths for source and destination because not doing so
 	// can result in some weird symbolic link inception
-	source, err := filepath.Abs(AssetsDir)
+	source, err := filepath.Abs(assetsDir)
 	if err != nil {
 		return err
 	}
 
-	dest, err := filepath.Abs(TargetDir + AssetsDir)
+	dest, err := filepath.Abs(targetDir + assetsDir)
 	if err != nil {
 		return err
 	}
@@ -214,18 +214,18 @@ func renderArticle(articleFile string) error {
 		fmt.Printf("Rendered article '%v'\n", articleFile)
 	}
 
-	source, err := ioutil.ReadFile(ArticlesDir + articleFile)
+	source, err := ioutil.ReadFile(articlesDir + articleFile)
 	if err != nil {
 		return err
 	}
 	rendered := renderMarkdown(source)
 
-	template, err := ace.Load(LayoutsDir+"main", LayoutsDir+"article", nil)
+	template, err := ace.Load(layoutsDir+"main", layoutsDir+"article", nil)
 	if err != nil {
 		return err
 	}
 
-	file, err := os.Create(TargetDir + trimExtension(articleFile))
+	file, err := os.Create(targetDir + trimExtension(articleFile))
 	if err != nil {
 		return err
 	}
@@ -270,12 +270,12 @@ func renderPage(pageFile string) error {
 		fmt.Printf("Rendered page '%v'\n", pageFile)
 	}
 
-	template, err := ace.Load(LayoutsDir+"main", PagesDir+pageFile, nil)
+	template, err := ace.Load(layoutsDir+"main", pagesDir+pageFile, nil)
 	if err != nil {
 		return err
 	}
 
-	file, err := os.Create(TargetDir + pageFile)
+	file, err := os.Create(targetDir + pageFile)
 	if err != nil {
 		return err
 	}

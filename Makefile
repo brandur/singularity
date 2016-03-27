@@ -1,10 +1,13 @@
 # The name of the Go executable.
 bin = singularity
 
-all: clean compile build
+all: clean compile test vet lint check-gofmt build
 
 build:
 	./$(bin)
+
+check-gofmt:
+	scripts/check_gofmt.sh
 
 clean:
 	mkdir -p public/
@@ -28,6 +31,18 @@ ifdef AWS_ACCESS_KEY_ID
 	aws s3 sync ./public/assets/ s3://$(S3_BUCKET)/assets/ --acl public-read --delete --follow-symlinks $(AWS_CLI_FLAGS)
 endif
 
+lint:
+	# Use a full path here for the benefit of Travis.
+	$(GOPATH)/bin/golint
+
+	# Hack to workaround the fact that Golint doesn't produce a non-zero exit
+	# code on failure because Go Core team is always right and everyone else is
+	# always wrong:
+	#
+	#     https://github.com/golang/lint/issues/65
+	#
+	test -z "$$(golint .)"
+
 save-deps:
 	godep save ./...
 
@@ -36,6 +51,9 @@ serve:
 
 test:
 	go test
+
+vet:
+	go vet
 
 watch:
 	fswatch -o articles/ assets/ layouts/ pages/ | xargs -n1 -I{} make build
