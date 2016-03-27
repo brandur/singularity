@@ -1,10 +1,22 @@
 {
 	"ImportPath": "github.com/brandur/singularity",
-	"GoVersion": "go1.5",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v60",
 	"Packages": [
-		"./..."
+		"github.com/brandur/singularity",
+		"github.com/brandur/singularity/cmd/singularity-build",
+		"github.com/brandur/singularity/cmd/singularity-serve"
 	],
 	"Deps": [
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.8.3-112-g219c8cb",
+			"Rev": "219c8cb75c258c552e999735be6df753ffc7afdc"
+		},
+		{
+			"ImportPath": "github.com/joeshaw/envdecode",
+			"Rev": "573d2abb11d7ad19d922aa80d4b7870225c20911"
+		},
 		{
 			"ImportPath": "github.com/russross/blackfriday",
 			"Comment": "v1.4-19-gc8875c0",
@@ -18,6 +30,10 @@
 			"ImportPath": "github.com/yosssi/ace",
 			"Comment": "v0.0.4-51-g71afeb7",
 			"Rev": "71afeb714739f9d5f7e1849bcd4a0a5938e1a70d"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "320cb01ddbbf0473674c2585f9b6e245721de355"
 		}
 	]
 }
