@@ -25,7 +25,7 @@ notifications:
     on_success: never
 
 script:
-  - VERBOSE=true make compile build deploy
+  - VERBOSE=true make
 
 # magic word to use faster/newer container-based architecture
 sudo: false
