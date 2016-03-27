@@ -1,7 +1,7 @@
 # The name of the Go executable.
 bin = singularity
 
-all: clean compile vet lint check-gofmt build
+all: clean compile test vet lint check-gofmt build
 
 build:
 	./$(bin)
