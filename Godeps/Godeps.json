@@ -27,6 +27,16 @@
 			"Rev": "10ef21a441db47d8b13ebcc5fd2310f636973c77"
 		},
 		{
+			"ImportPath": "github.com/stretchr/testify/assert",
+			"Comment": "v1.0-17-g089c718",
+			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/require",
+			"Comment": "v1.0-17-g089c718",
+			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
+		},
+		{
 			"ImportPath": "github.com/yosssi/ace",
 			"Comment": "v0.0.4-51-g71afeb7",
 			"Rev": "71afeb714739f9d5f7e1849bcd4a0a5938e1a70d"
