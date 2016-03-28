@@ -4,7 +4,11 @@
   h2 Table of Contents
   ul
     li
+      a href=/foreword Foreword
+    li
       a href=/introduction Introduction
+    li
+      a href=/techniques Techniques
   h2 Other Pages
   ul
     li
