@@ -52,7 +52,7 @@ test:
 	go test $(shell go list ./... | grep -v '/vendor/')
 
 vet:
-	go vet
+	go vet $(shell go list ./... | grep -v '/vendor/')
 
 watch:
 	fswatch -o articles/ assets/ layouts/ pages/ | xargs -n1 -I{} make build
