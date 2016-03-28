@@ -38,6 +38,7 @@ func main() {
 
 func serve(port int) error {
 	log.Infof("Serving '%v' on port %v", path.Clean(singularity.TargetDir), port)
+	log.Infof("Open browser to: http://localhost:%v/index", port)
 	handler := http.FileServer(http.Dir(singularity.TargetDir))
 	return http.ListenAndServe(":"+strconv.Itoa(port), handler)
 }
