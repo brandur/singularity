@@ -2,26 +2,34 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/brandur/singularity"
+	"github.com/joeshaw/envdecode"
 	"github.com/russross/blackfriday"
 	"github.com/yosssi/ace"
 )
 
 var (
-	concurrency = 10
-	errors      = make(chan error)
+	errors = make(chan error)
 )
+
+// Conf contains configuration information for the command.
+type Conf struct {
+	// Concurrency is how main background Goroutines will be used to build all
+	// site resources (e.g. articles, pages, etc.).
+	Concurrency int `env:"CONCURRENCY,default=10"`
+
+	// Verbose is whether the program will print debug output as it's running.
+	Verbose bool `env:"VERBOSE,default=false"`
+}
 
 func main() {
 	// We should probably have a more complete approach to error handling here,
@@ -34,29 +42,19 @@ func main() {
 		}
 	}()
 
-	err := singularity.CreateTargetDir()
+	var conf Conf
+	err := envdecode.Decode(&conf)
 	errors <- err
 
-	build()
+	singularity.InitLog(conf.Verbose)
+
+	err = singularity.CreateTargetDir()
+	errors <- err
+
+	build(conf.Concurrency)
 }
 
-func build() {
-	var verbose bool
-	if os.Getenv("VERBOSE") == "true" {
-		verbose = true
-	}
-
-	singularity.InitLog(verbose)
-
-	if os.Getenv("CONCURRENCY") != "" {
-		c, err := strconv.Atoi(os.Getenv("CONCURRENCY"))
-		errors <- err
-		if c < 1 {
-			errors <- fmt.Errorf("CONCURRENCY must be >= 1")
-		}
-		concurrency = c
-	}
-
+func build(concurrency int) {
 	start := time.Now()
 	defer func() {
 		log.Infof("Site built in %v", time.Now().Sub(start))
