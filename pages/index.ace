@@ -9,6 +9,8 @@
       a href=/introduction Introduction
     li
       a href=/techniques Techniques
+    li
+      a href=/implementation Implementation
   h2 Other Pages
   ul
     li

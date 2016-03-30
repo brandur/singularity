@@ -48,3 +48,6 @@ heavy reliance on external operations services (like Heroku), it's quite
 possible for them to stay online even if their owners are absent for years.
 
 ## The Skeleton Crew
+
+How many people are spending most of their days staving off disasters versus
+working on new things?
