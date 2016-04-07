@@ -48,7 +48,7 @@ exports.handler = function (event, context) {
             console.log('Travis response status: ' + res.statusCode)
             console.log('Travis response: ' + responseString);
 
-            if (res.statusCode > 200 && res.statusCode < 300) {
+            if (res.statusCode >= 200 && res.statusCode < 300) {
                 context.succeed('Rebuild executed successfully.');
             } else {
                 context.fail('Rebuild failed with HTTP error.');
