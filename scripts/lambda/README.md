@@ -9,14 +9,15 @@ example).
 * `index.js` contains a Lambda script to trigger a rebuild.
 * `event.js` is a test "event" for use with Lambda.
 
-`index.js` must be configured with a repository and a Travis token which can be
-obtained via CLI:
+You'll need a Travis token to run `index.js`. One can be obtained via their
+CLI:
 
     gem install travis
     travis login --org
     travis token
 
-The scripts can be tested locally with Node's lambda-local package:
+The scripts can also be tested locally with Node's lambda-local package:
 
+    npm install -g jslint
     npm install -g lambda-local
-    lambda-local -l index.js -h handler -e event.js
+    REPOSITORY=brandur/singularity TRAVIS_TOKEN= make
