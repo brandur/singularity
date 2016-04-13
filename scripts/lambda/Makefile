@@ -10,7 +10,7 @@ get-deps:
 	npm install -g lambda-local
 
 lint:
-	jslint *.js
+	jslint --edition=es6 *.js
 
 test:
 	lambda-local -l index.js -h handler -e event.js
