@@ -1,3 +1,5 @@
+/*jslint es6 */
+
 "use strict";
 
 //
