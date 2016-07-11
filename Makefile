@@ -31,18 +31,9 @@ install:
 	go install $(shell go list ./... | grep -v '/vendor/')
 
 lint:
-	$(GOPATH)/bin/golint
-
-	# Hack to workaround the fact that Golint doesn't produce a non-zero exit
-	# code on failure because Go Core team is always right and everyone else is
-	# always wrong:
-	#
-	#     https://github.com/golang/lint/issues/65
-	#
-	test -z "$$(golint .)"
+	$(GOPATH)/bin/golint -set_exit_status
 
 save:
-	#godep save ./...
 	godep save $(shell go list ./... | grep -v '/vendor/')
 
 serve:
