@@ -7,32 +7,34 @@ through Travis CI.
 
 ## Build
 
-Build with:
+Install Go 1.6+, then:
 
-    make
+``` sh
+go get -u github.com/ddollar/forego
 
-The results will appear in `public/`.
+cp .env.sample .env
 
-## Development
+# Compile Go executables.
+make install
 
-Rebuild on changes in content directories using fswatch:
+# Run an initial build of the site, look for build output in public/.
+forego run make build
 
-    brew install fswatch
-    make watch
+# Watch for changes in Go files and/or content and recompile and rebuild when
+# one occurs.
+forego start
+```
 
-Serve the built content using:
+Or an easy all-in-one:
 
-    make serve
-
-Or do both using forego:
-
-    go get -u github.com/ddollar/forego
-    forego start
+``` sh
+make install && forego run make build && forego start
+```
 
 ## Deployment
 
 The repository will deploy to S3 automatically from the Travis build when
-changes are pushed to master.
+changes are committed to master.
 
 This works by having [encrypted variables][travis-encrypted] configured in
 `.travis.yml` for an IAM account with privileges to the production S3 bucket.
