@@ -1,13 +1,8 @@
 = doctype html
 html lang=en
   head
-    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"
-
-    link href="/assets/{{.Release}}/app.css" media="screen" rel="stylesheet" type="text/css"
-    script src="/assets/{{.Release}}/app.js" type="text/javascript"
-
-    = include views/_cardo .
-
+    link rel="stylesheet" href="/assets/{{.Release}}/stylesheets/main.css"
+    link href="https://fonts.googleapis.com/css?family=Cardo" rel="stylesheet" type="text/css"
   body
     .container
       = yield main
