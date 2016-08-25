@@ -1,11 +1,9 @@
 {
 	"ImportPath": "github.com/brandur/singularity",
 	"GoVersion": "go1.6",
-	"GodepVersion": "v60",
+	"GodepVersion": "v74",
 	"Packages": [
-		"github.com/brandur/singularity",
-		"github.com/brandur/singularity/cmd/singularity-build",
-		"github.com/brandur/singularity/cmd/singularity-serve"
+		"./..."
 	],
 	"Deps": [
 		{
@@ -14,13 +12,29 @@
 			"Rev": "219c8cb75c258c552e999735be6df753ffc7afdc"
 		},
 		{
+			"ImportPath": "github.com/brandur/sorg/markdown",
+			"Rev": "a79f9f88cae0b7f309bab6e434e28573c0880564"
+		},
+		{
+			"ImportPath": "github.com/brandur/sorg/pool",
+			"Rev": "a79f9f88cae0b7f309bab6e434e28573c0880564"
+		},
+		{
+			"ImportPath": "github.com/davecgh/go-spew/spew",
+			"Rev": "5215b55f46b2b919f50a1df0eaa5886afe4e3b3d"
+		},
+		{
 			"ImportPath": "github.com/joeshaw/envdecode",
-			"Rev": "573d2abb11d7ad19d922aa80d4b7870225c20911"
+			"Rev": "32118ea5f56d5358408e78d150be1843a695e35c"
+		},
+		{
+			"ImportPath": "github.com/pmezard/go-difflib/difflib",
+			"Rev": "792786c7400a136282c1664665ae0a8db921c6c2"
 		},
 		{
 			"ImportPath": "github.com/russross/blackfriday",
-			"Comment": "v1.4-19-gc8875c0",
-			"Rev": "c8875c0ed47e07b063c3628e2e4d4c9826721795"
+			"Comment": "v1.4-33-g1d6b8e9",
+			"Rev": "1d6b8e9301e720b08a8938b8c25c018285885438"
 		},
 		{
 			"ImportPath": "github.com/shurcooL/sanitized_anchor_name",
