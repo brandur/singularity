@@ -21,7 +21,7 @@ LONG_TTL := 86400
 # that are expected to change more frequently like any HTML file.
 SHORT_TTL := 3600
 
-deploy: build
+deploy: build check-target-dir
 # Note that AWS_ACCESS_KEY_ID will only be set for builds on the master
 # branch because it's stored in `.travis.yml` as an encrypted variable.
 # Encrypted variables are not made available to non-master branches because
@@ -38,6 +38,9 @@ ifdef AWS_ACCESS_KEY_ID
 
 	# Then move on to assets and allow S3 to detect content type.
 	aws s3 sync $(TARGET_DIR)/assets/ s3://$(S3_BUCKET)/assets/ --acl public-read --cache-control max-age=$(LONG_TTL) --delete --follow-symlinks $(AWS_CLI_FLAGS)
+
+	# Upload Atom feed files with their proper content type.
+	find $(TARGET_DIR) -name '*.atom' | sed "s|^\$(TARGET_DIR)/||" | xargs -I{} -n1 aws s3 cp $(TARGET_DIR)/{} s3://$(S3_BUCKET)/{} --acl public-read --cache-control max-age=$(SHORT_TTL) --content-type application/xml
 
 	# This one is a bit tricker to explain, but what we're doing here is
 	# uploading directory indexes as files at their directory name. So for
@@ -61,10 +64,6 @@ endif
 
 install:
 	go install $(shell go list ./... | grep -v '/vendor/')
-
-# Invalidates CloudFront's entire cache.
-invalidate-all: check-aws-keys check-cloudfront-id
-	aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_ID) --paths /
 
 lint:
 	$(GOPATH)/bin/golint -set_exit_status
@@ -99,23 +98,6 @@ watch-go:
 #
 # Helpers
 #
-
-# Requires that variables necessary to make an AWS API call are in the
-# environment.
-check-aws-keys:
-ifndef AWS_ACCESS_KEY_ID
-	$(error AWS_ACCESS_KEY_ID is required)
-endif
-ifndef AWS_SECRET_ACCESS_KEY
-	$(error AWS_SECRET_ACCESS_KEY is required)
-endif
-
-# Requires that variables necessary to update a CloudFront distribution are in
-# the environment.
-check-cloudfront-id:
-ifndef CLOUDFRONT_ID
-	$(error CLOUDFRONT_ID is required)
-endif
 
 check-target-dir:
 ifndef TARGET_DIR

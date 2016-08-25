@@ -7,6 +7,12 @@ import (
 )
 
 const (
+	// Release is the asset version of the site. Bump when any assets are
+	// updated to blow away any browser caches.
+	Release = "10"
+)
+
+const (
 	// ArticlesDir is the location of site articles.
 	ArticlesDir = "./articles/"
 
@@ -16,6 +22,9 @@ const (
 
 	// LayoutsDir is the location of site layouts.
 	LayoutsDir = "./layouts/"
+
+	// MainLayout is the site's main layout.
+	MainLayout = LayoutsDir + "/main"
 
 	// PagesDir is the location of site static pages (i.e. mostly any page
 	// that isn't an article).

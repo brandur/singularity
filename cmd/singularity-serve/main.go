@@ -16,10 +16,13 @@ type Conf struct {
 	Port int `env:"PORT,default=5001"`
 }
 
+// Left as a global for now for the sake of convenience, but it's not used in
+// very many places and can probably be refactored as a local if desired.
+var conf Conf
+
 func main() {
 	singularity.InitLog(false)
 
-	var conf Conf
 	err := envdecode.Decode(&conf)
 	if err != nil {
 		log.Fatal(err)
@@ -38,7 +41,7 @@ func main() {
 
 func serve(port int) error {
 	log.Infof("Serving '%v' on port %v", path.Clean(singularity.TargetDir), port)
-	log.Infof("Open browser to: http://localhost:%v/index", port)
+	log.Infof("Open browser to: http://localhost:%v/", port)
 	handler := http.FileServer(http.Dir(singularity.TargetDir))
 	return http.ListenAndServe(":"+strconv.Itoa(port), handler)
 }

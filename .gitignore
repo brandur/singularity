@@ -1,4 +1,7 @@
+.DS_Store
 .env
 .s3cfg
 public/
+public-dev/
 singularity
+tags
