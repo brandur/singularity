@@ -128,7 +128,7 @@ func linkFontAssets() error {
 		return err
 	}
 
-	dest, err := filepath.Abs(singularity.TargetDir + "/assets/fonts/")
+	dest, err := filepath.Abs(path.Join(singularity.TargetDir, "assets", "fonts"))
 	if err != nil {
 		return err
 	}
@@ -142,7 +142,7 @@ func linkImageAssets() error {
 		log.Debugf("Linked image assets in %v.", time.Now().Sub(start))
 	}()
 
-	err := os.RemoveAll(singularity.TargetDir + path.Clean(singularity.AssetsDir))
+	err := os.RemoveAll(path.Join(singularity.TargetDir, path.Clean(singularity.AssetsDir)))
 	if err != nil {
 		return err
 	}
@@ -154,7 +154,7 @@ func linkImageAssets() error {
 		return err
 	}
 
-	dest, err := filepath.Abs(singularity.TargetDir + singularity.AssetsDir)
+	dest, err := filepath.Abs(path.Join(singularity.TargetDir, singularity.AssetsDir))
 	if err != nil {
 		return err
 	}
@@ -171,7 +171,8 @@ func compileArticle(articleFile string) error {
 	name := trimExtension(articleFile)
 	log.Debugf("Rendering article: %v", name)
 
-	source, err := ioutil.ReadFile(singularity.ArticlesDir + articleFile)
+	source, err :=
+		ioutil.ReadFile(path.Join(singularity.ArticlesDir, articleFile))
 	if err != nil {
 		return err
 	}
@@ -198,7 +199,7 @@ func compilePage(dir, name string) error {
 	pagePath := strings.TrimPrefix(dir, singularity.PagesDir) + name
 
 	// Looks something like "./public/about".
-	target := singularity.TargetDir + "/" + pagePath
+	target := path.Join(singularity.TargetDir, pagePath)
 
 	locals, ok := pagesVars[pagePath]
 	if !ok {
@@ -207,12 +208,12 @@ func compilePage(dir, name string) error {
 
 	locals = getLocals("Page", locals)
 
-	err := os.MkdirAll(singularity.TargetDir+"/"+dir, 0755)
+	err := os.MkdirAll(path.Join(singularity.TargetDir, dir), 0755)
 	if err != nil {
 		return err
 	}
 
-	err = renderView(singularity.MainLayout, dir+"/"+name,
+	err = renderView(singularity.MainLayout, path.Join(dir, name),
 		target, locals)
 	if err != nil {
 		return err
