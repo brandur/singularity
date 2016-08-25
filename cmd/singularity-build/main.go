@@ -168,7 +168,8 @@ func linkImageAssets() error {
 }
 
 func compileArticle(articleFile string) error {
-	log.Debugf("Rendered article '%v'", articleFile)
+	name := trimExtension(articleFile)
+	log.Debugf("Rendering article: %v", name)
 
 	source, err := ioutil.ReadFile(singularity.ArticlesDir + articleFile)
 	if err != nil {
@@ -176,21 +177,13 @@ func compileArticle(articleFile string) error {
 	}
 	rendered := markdown.Render(string(source))
 
-	template, err := ace.Load(singularity.LayoutsDir+"main", singularity.LayoutsDir+"article", nil)
-	if err != nil {
-		return err
-	}
+	locals := getLocals(name, map[string]interface{}{
+		"Content": rendered,
+	})
 
-	file, err := os.Create(singularity.TargetDir + trimExtension(articleFile))
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	writer := bufio.NewWriter(file)
-	defer writer.Flush()
-
-	err = template.Execute(writer, map[string]string{"Content": string(rendered)})
+	err = renderView(singularity.MainLayout,
+		path.Join(singularity.LayoutsDir, "article"),
+		path.Join(singularity.TargetDir, name), locals)
 	if err != nil {
 		return err
 	}
