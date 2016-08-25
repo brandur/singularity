@@ -86,7 +86,11 @@ func main() {
 	var tasks []*pool.Task
 
 	tasks = append(tasks, pool.NewTask(func() error {
-		return linkAssets()
+		return linkFontAssets()
+	}))
+
+	tasks = append(tasks, pool.NewTask(func() error {
+		return linkImageAssets()
 	}))
 
 	articleTasks, err := tasksForArticles()
@@ -113,8 +117,30 @@ func main() {
 // They are normally run concurrently.
 //
 
-func linkAssets() error {
-	log.Debugf("Linking assets directory")
+func linkFontAssets() error {
+	start := time.Now()
+	defer func() {
+		log.Debugf("Linked font assets in %v.", time.Now().Sub(start))
+	}()
+
+	source, err := filepath.Abs(singularity.FontsDir)
+	if err != nil {
+		return err
+	}
+
+	dest, err := filepath.Abs(singularity.TargetDir + "/assets/fonts/")
+	if err != nil {
+		return err
+	}
+
+	return ensureSymlink(source, dest)
+}
+
+func linkImageAssets() error {
+	start := time.Now()
+	defer func() {
+		log.Debugf("Linked image assets in %v.", time.Now().Sub(start))
+	}()
 
 	err := os.RemoveAll(singularity.TargetDir + path.Clean(singularity.AssetsDir))
 	if err != nil {
@@ -133,7 +159,7 @@ func linkAssets() error {
 		return err
 	}
 
-	err = os.Symlink(source, dest)
+	err = ensureSymlink(source, dest)
 	if err != nil {
 		return err
 	}
@@ -270,6 +296,50 @@ func tasksForPagesDir(dir string) ([]*pool.Task, error) {
 //
 // Any other functions. Try to keep them alphabetized.
 //
+
+func ensureSymlink(source, dest string) error {
+	log.Debugf("Checking symbolic link (%v): %v -> %v",
+		path.Base(source), source, dest)
+
+	var actual string
+
+	_, err := os.Stat(dest)
+
+	// Note that if a symlink file does exist, but points to a non-existent
+	// location, we still get an "does not exist" error back, so we fall down
+	// to the general create path so that the symlink file can be removed.
+	//
+	// The call to RemoveAll does not affect the other path of the symlink file
+	// not being present because it doesn't care whether or not the file it's
+	// trying remove is actually there.
+	if os.IsNotExist(err) {
+		log.Debugf("Destination link does not exist. Creating.")
+		goto create
+	}
+	if err != nil {
+		return err
+	}
+
+	actual, err = os.Readlink(dest)
+	if err != nil {
+		return err
+	}
+
+	if actual == source {
+		log.Debugf("Link exists.")
+		return nil
+	}
+
+	log.Debugf("Destination links to wrong source. Creating.")
+
+create:
+	err = os.RemoveAll(dest)
+	if err != nil {
+		return err
+	}
+
+	return os.Symlink(source, dest)
+}
 
 // Gets a map of local values for use while rendering a template and includes
 // a few "special" values that are globally relevant to all templates.

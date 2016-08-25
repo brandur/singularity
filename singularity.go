@@ -20,6 +20,9 @@ const (
 	// etc.).
 	AssetsDir = "./assets/"
 
+	// AssetsDir is the location of the site web fonts.
+	FontsDir = "./fonts/"
+
 	// LayoutsDir is the location of site layouts.
 	LayoutsDir = "./layouts/"
 
