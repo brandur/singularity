@@ -2,7 +2,7 @@
 html lang=en
   head
     link rel="stylesheet" href="/assets/{{.Release}}/stylesheets/main.css"
-    link href="https://fonts.googleapis.com/css?family=Cardo" rel="stylesheet" type="text/css"
+    = include views/_cardo .
   body
     .container
       = yield main

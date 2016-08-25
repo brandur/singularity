@@ -93,6 +93,10 @@ func main() {
 		return linkImageAssets()
 	}))
 
+	tasks = append(tasks, pool.NewTask(func() error {
+		return linkStylesheets()
+	}))
+
 	articleTasks, err := tasksForArticles()
 	if err != nil {
 		log.Fatal(err)
@@ -142,29 +146,50 @@ func linkImageAssets() error {
 		log.Debugf("Linked image assets in %v.", time.Now().Sub(start))
 	}()
 
-	err := os.RemoveAll(path.Join(singularity.TargetDir, path.Clean(singularity.AssetsDir)))
+	assets, err := ioutil.ReadDir(singularity.AssetsDir + "/images")
 	if err != nil {
 		return err
 	}
 
-	// we use absolute paths for source and destination because not doing so
-	// can result in some weird symbolic link inception
-	source, err := filepath.Abs(singularity.AssetsDir)
-	if err != nil {
-		return err
-	}
+	for _, asset := range assets {
+		// we use absolute paths for source and destination because not doing
+		// so can result in some weird symbolic link inception
+		source, err := filepath.Abs(singularity.AssetsDir + "/images/" + asset.Name())
+		if err != nil {
+			return err
+		}
 
-	dest, err := filepath.Abs(path.Join(singularity.TargetDir, singularity.AssetsDir))
-	if err != nil {
-		return err
-	}
+		dest, err := filepath.Abs(singularity.TargetDir + "/assets/" + asset.Name())
+		if err != nil {
+			return err
+		}
 
-	err = ensureSymlink(source, dest)
-	if err != nil {
-		return err
+		err = ensureSymlink(source, dest)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
+}
+
+func linkStylesheets() error {
+	start := time.Now()
+	defer func() {
+		log.Debugf("Linked stylesheets in %v.", time.Now().Sub(start))
+	}()
+
+	source, err := filepath.Abs(path.Join(singularity.AssetsDir, "stylesheets"))
+	if err != nil {
+		return err
+	}
+
+	dest, err := filepath.Abs(path.Join(singularity.TargetDir, "assets", singularity.Release, "stylesheets"))
+	if err != nil {
+		return err
+	}
+
+	return ensureSymlink(source, dest)
 }
 
 func compileArticle(articleFile string) error {
