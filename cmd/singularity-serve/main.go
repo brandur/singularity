@@ -28,7 +28,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = singularity.CreateTargetDir()
+	err = singularity.CreateOutputDirs(singularity.TargetDir)
 	if err != nil {
 		log.Fatal(err)
 	}

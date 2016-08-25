@@ -78,7 +78,7 @@ func main() {
 
 	singularity.InitLog(conf.Verbose)
 
-	err = singularity.CreateTargetDir()
+	err = singularity.CreateOutputDirs(singularity.TargetDir)
 	if err != nil {
 		log.Fatal(err)
 	}

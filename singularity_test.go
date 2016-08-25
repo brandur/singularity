@@ -7,8 +7,8 @@ import (
 	assert "github.com/stretchr/testify/require"
 )
 
-func TestCreateDir(t *testing.T) {
-	err := CreateTargetDir()
+func TestCreateOutputDirs(t *testing.T) {
+	err := CreateOutputDirs(TargetDir)
 	assert.NoError(t, err)
 }
 

@@ -2,6 +2,7 @@ package singularity
 
 import (
 	"os"
+	"time"
 
 	log "github.com/Sirupsen/logrus"
 )
@@ -20,7 +21,7 @@ const (
 	// etc.).
 	AssetsDir = "./assets/"
 
-	// AssetsDir is the location of the site web fonts.
+	// FontsDir is the location of the site web fonts.
 	FontsDir = "./fonts/"
 
 	// LayoutsDir is the location of site layouts.
@@ -37,9 +38,31 @@ const (
 	TargetDir = "./public/"
 )
 
-// CreateTargetDir creates TargetDir if it doesn't already exist.
-func CreateTargetDir() error {
-	return os.MkdirAll(TargetDir, 0755)
+// A list of all directories that are in the built static site.
+var outputDirs = []string{
+	".",
+	"assets",
+	"assets/" + Release,
+	"fonts",
+}
+
+// CreateOutputDirs creates a target directory for the static site and all
+// other necessary directories for the build if they don't already exist.
+func CreateOutputDirs(targetDir string) error {
+	start := time.Now()
+	defer func() {
+		log.Debugf("Created target directories in %v.", time.Now().Sub(start))
+	}()
+
+	for _, dir := range outputDirs {
+		dir = targetDir + "/" + dir
+		err := os.MkdirAll(dir, 0755)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 // InitLog initializes logging for singularity programs.
