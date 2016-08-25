@@ -86,11 +86,11 @@ func main() {
 	var tasks []*pool.Task
 
 	tasks = append(tasks, pool.NewTask(func() error {
-		return linkFontAssets()
+		return linkFonts()
 	}))
 
 	tasks = append(tasks, pool.NewTask(func() error {
-		return linkImageAssets()
+		return linkImages()
 	}))
 
 	tasks = append(tasks, pool.NewTask(func() error {
@@ -121,7 +121,7 @@ func main() {
 // They are normally run concurrently.
 //
 
-func linkFontAssets() error {
+func linkFonts() error {
 	start := time.Now()
 	defer func() {
 		log.Debugf("Linked font assets in %v.", time.Now().Sub(start))
@@ -140,7 +140,7 @@ func linkFontAssets() error {
 	return ensureSymlink(source, dest)
 }
 
-func linkImageAssets() error {
+func linkImages() error {
 	start := time.Now()
 	defer func() {
 		log.Debugf("Linked image assets in %v.", time.Now().Sub(start))
