@@ -8,6 +8,8 @@
     li
       a href=/introduction Introduction
     li
+      a href=/risks Risks
+    li
       a href=/techniques Techniques
     li
       a href=/implementation Implementation
