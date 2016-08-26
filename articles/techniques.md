@@ -1,13 +1,13 @@
 
 
-## Run Less
+## Run Less (#run-less)
 
-## Reduce Moving Parts
+## Reduce Moving Parts (#moving-parts)
 
-## Embrace Ephemerality
+## Embrace Ephemerality (#ephemerality)
 
-### Slinky
+### Slinky (#slink)
 
-## Inject Chaos
+## Inject Chaos (#inject-chaos)
 
 * The Netflix chaos monkey.

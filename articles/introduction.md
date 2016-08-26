@@ -2,7 +2,7 @@
 
 Abstract concepts.
 
-## The Walk Away Test
+## The Walk Away Test (#walk-away-test)
 
 Most uninitiated users of Intenet services take stability for granted. A
 website is a website, and opening amazon.com looks no different than
@@ -47,7 +47,7 @@ architecture, dead simple deployment (say a set of HTML files stored in S3),
 heavy reliance on external operations services (like Heroku), it's quite
 possible for them to stay online even if their owners are absent for years.
 
-## The Skeleton Crew
+## The Skeleton Crew (#skeleton-crew)
 
 How many people are spending most of their days staving off disasters versus
 working on new things?

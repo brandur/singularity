@@ -1,6 +1,6 @@
 # Foreword
 
-## Critical Thought
+## Critical Thought (#critical-thought)
 
 Firstly, it's well worthwhile reminding readers of the important of critical
 thought. This is apparently a platitude of the highest order, but in practice,
