@@ -68,9 +68,6 @@ install:
 lint:
 	$(GOPATH)/bin/golint -set_exit_status
 
-save:
-	godep save $(shell go list ./... | grep -v '/vendor/')
-
 serve:
 	$(GOPATH)/bin/singularity-serve
 

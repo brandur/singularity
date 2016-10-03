@@ -12,6 +12,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/brandur/singularity"
 	"github.com/brandur/singularity/templatehelpers"
+	"github.com/brandur/sorg/assets"
 	"github.com/brandur/sorg/markdown"
 	"github.com/brandur/sorg/pool"
 	"github.com/joeshaw/envdecode"
@@ -78,6 +79,12 @@ func main() {
 
 	singularity.InitLog(conf.Verbose)
 
+	// This is where we stored "versioned" assets like compiled JS and CSS.
+	// These assets have a release number that we can increment and by
+	// extension quickly invalidate.
+	versionedAssetsDir := path.Join(singularity.TargetDir, "assets",
+		singularity.Release)
+
 	err = singularity.CreateOutputDirs(singularity.TargetDir)
 	if err != nil {
 		log.Fatal(err)
@@ -94,7 +101,15 @@ func main() {
 	}))
 
 	tasks = append(tasks, pool.NewTask(func() error {
-		return linkStylesheets()
+		return assets.CompileJavascripts(
+			path.Join(singularity.AssetsDir, "javascripts"),
+			path.Join(versionedAssetsDir, "app.js"))
+	}))
+
+	tasks = append(tasks, pool.NewTask(func() error {
+		return assets.CompileStylesheets(
+			path.Join(singularity.AssetsDir, "stylesheets"),
+			path.Join(versionedAssetsDir, "app.css"))
 	}))
 
 	articleTasks, err := tasksForArticles()
@@ -171,25 +186,6 @@ func linkImages() error {
 	}
 
 	return nil
-}
-
-func linkStylesheets() error {
-	start := time.Now()
-	defer func() {
-		log.Debugf("Linked stylesheets in %v.", time.Now().Sub(start))
-	}()
-
-	source, err := filepath.Abs(path.Join(singularity.AssetsDir, "stylesheets"))
-	if err != nil {
-		return err
-	}
-
-	dest, err := filepath.Abs(path.Join(singularity.TargetDir, "assets", singularity.Release, "stylesheets"))
-	if err != nil {
-		return err
-	}
-
-	return ensureSymlink(source, dest)
 }
 
 func compileArticle(articleFile string) error {
