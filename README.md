@@ -57,4 +57,12 @@ Then set appropriate AWS keys and go for it:
     export S3_BUCKET=singularity.brandur.org
     make deploy
 
+## Vendoring Dependencies
+
+Dependencies are managed with govendor. New ones can be vendored using these
+commands:
+
+    go get -u github.com/kardianos/govendor
+    govendor add +external
+
 [travis-encrypted]: https://docs.travis-ci.com/user/environment-variables/#Encrypted-Variables
