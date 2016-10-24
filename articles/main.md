@@ -1,3 +1,31 @@
+# Foreword
+
+## Critical Thought (#critical-thought)
+
+Firstly, it's well worthwhile reminding readers of the important of critical
+thought. This is apparently a platitude of the highest order, but in practice,
+technical articles are one place where otherwise great critical thinkers often
+forget to apply the technique. There was a time when Node was billed as the
+saviour of the engineering world. Before that, Ruby occupied a similar
+heroic position. Prior to that, C++.
+
+Historical context reveals that none of these technologies turned out to be absolute solutions.
+
+Like every other technical publication ever written, this one doesn't have all the
+answers, and contains a healthy dose of idealism. What's preached isn't
+necessarily what's practiced.
+
+## Application
+
+The ideas contained in this publication are not necessarily universally
+applicable. There are cases where services will need to be close to hardware,
+require very manual operation, or have restrictions in place for compliance
+reasons.
+
+However, a cautious architect would be wise not to discount anything wholesale.
+Re-examing assumptions that are firmly concreted into the shared mental
+landscape at any organization may reveal that 
+
 # Introduction
 
 Abstract concepts.
@@ -53,3 +81,65 @@ A basic question
 
 How many people are spending most of their days staving off disasters versus
 working on new things?
+
+# Risks
+
+## Time (#time)
+
+## Entropy (#entropy)
+
+## Bitrot (#bitrot)
+
+# Techniques
+
+## Run Less (#run-less)
+
+## Reduce Moving Parts (#moving-parts)
+
+## Embrace Ephemerality (#ephemerality)
+
+Use services. Don't do anything yourself if you can avoid it.
+
+* Use AWS instead of your own data center.
+* Use GitHub instead of Phab.
+* Use Rollbar instead of Sentry.
+* Use DataDog instead of Graphite.
+
+It's an easy conceptual pitfall to think that running something yourself will
+be easy and solve all your problems. Even if it easy after the initial install,
+consider how it gets upgrade and maintained over the next five years.
+
+Engineers should have close to an allergic reaction when somebody suggests
+running a new type of component in-house, even if it's a technology that's
+exciting and known to be mostly stable (e.g. Kafka).
+
+## Reduce Moving Parts
+
+### Static Sites
+
+Static sites may be the ultimate form of minimalism when it comes to web
+services. They're cheap to run computationally and will handle even the largest
+volumes of traffic without batting an eye. They're also ideal for horizontal
+scaling which makes it especially easy to introduce redundancy into the system.
+
+They're obviously not suitable for many cases in that core services are likely
+going to dynamic responses, but even the most database-driven service out there
+can still have its company's blog, marketing pages, and status site easily made
+into 
+
+
+### Slinky (#slink)
+
+## Inject Chaos (#inject-chaos)
+
+* The Netflix chaos monkey.
+
+## Rational Microservices
+
+## Don't Write New Software
+
+# Implementation
+
+## Dynamic Languages (#dynamic-languages)
+
+Consider not using them.
