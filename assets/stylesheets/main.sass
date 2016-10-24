@@ -1,6 +1,8 @@
 html
-  // Root font size. All other sizes with "rem" are relative to this
-  font-size: 20px
+  // Root font size. All other sizes with "rem" are relative to this.
+  //
+  // This corresponds to the default font size of 16px.
+  font-size: 100%
 
   body
     color: #222
@@ -10,8 +12,7 @@ html
     .container
       font-size: 1rem
       margin: 0 auto
-      max-width: 600px
-      padding: 20% 0 0 0
+      max-width: 800px
 
   /*
    * Headers
@@ -19,27 +20,25 @@ html
 
   h1, h2, h3, h4, h5, h6
     font-family: helvetica, arial, geneva, sans-serif
+    line-height: 1em
 
   h1
-    /* make this readable again
-    color: #eee
-    text-shadow: 0px 0px 4px #000
-    */
+    color: #222
     font-size: 6.25rem
     letter-spacing: -6px
-    margin: 20px 0 50px 0
+    margin: 50px 0 15px 0
 
   h2
     font-size: 1.55rem
-    margin: 30px 0 -10px 0
+    margin: 30px 0 10px 0
 
   h3
     font-size: 1.25rem
-    margin: 30px 0 -15px 0
+    margin: 30px 0 10px 0
 
   h4
     font-size: 1.05rem
-    margin: 30px 0 -15px 0
+    margin: 30px 0 10px 0
 
   /*
    * Lists
@@ -76,3 +75,22 @@ html
 
   strong
     font-weight: bold
+
+  /*
+   * Article
+   */
+
+  article
+    font-size: 0.9rem
+    line-height: 1.5em
+
+    p
+      margin: 10px 0
+
+    .section
+      column-width: 220px
+      -moz-column-width: 220px
+      -webkit-column-width: 220px
+      column-gap: 30px
+      -moz-column-gap: 30px
+      -webkit-column-gap: 30px
