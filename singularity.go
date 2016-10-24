@@ -31,9 +31,6 @@ const (
 	// MainLayout is the site's main layout.
 	MainLayout = LayoutsDir + "/main"
 
-	// MainLayout is the site's main layout.
-	MainLayout = LayoutsDir + "/main"
-
 	// PagesDir is the location of site static pages (i.e. mostly any page
 	// that isn't an article).
 	PagesDir = "./pages"

@@ -2,7 +2,6 @@
 
 ## Run Less (#run-less)
 
-<<<<<<< HEAD
 ## Reduce Moving Parts (#moving-parts)
 
 ## Embrace Ephemerality (#ephemerality)
