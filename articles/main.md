@@ -2,6 +2,8 @@
 
 ## Critical Thought (#critical-thought)
 
+<div class="section">
+
 Firstly, it's well worthwhile reminding readers of the important of critical
 thought. This is apparently a platitude of the highest order, but in practice,
 technical articles are one place where otherwise great critical thinkers often
@@ -14,6 +16,8 @@ Historical context reveals that none of these technologies turned out to be abso
 Like every other technical publication ever written, this one doesn't have all the
 answers, and contains a healthy dose of idealism. What's preached isn't
 necessarily what's practiced.
+
+</div>
 
 ## Application
 
@@ -84,17 +88,27 @@ working on new things?
 
 # Risks
 
+TODO
+
 ## Time (#time)
+
+TODO
 
 ## Entropy (#entropy)
 
+TODO
+
 ## Bitrot (#bitrot)
+
+TODO
 
 # Techniques
 
+TODO
+
 ## Run Less (#run-less)
 
-## Reduce Moving Parts (#moving-parts)
+TODO
 
 ## Embrace Ephemerality (#ephemerality)
 
@@ -113,9 +127,11 @@ Engineers should have close to an allergic reaction when somebody suggests
 running a new type of component in-house, even if it's a technology that's
 exciting and known to be mostly stable (e.g. Kafka).
 
-## Reduce Moving Parts
+## Reduce Moving Parts (#moving-parts)
 
-### Static Sites
+TODO
+
+### Static Sites (#static-sites)
 
 Static sites may be the ultimate form of minimalism when it comes to web
 services. They're cheap to run computationally and will handle even the largest
@@ -128,17 +144,29 @@ can still have its company's blog, marketing pages, and status site easily made
 into 
 
 
-### Slinky (#slink)
+### Slinky (#slinky)
+
+TODO
 
 ## Inject Chaos (#inject-chaos)
 
 * The Netflix chaos monkey.
 
-## Rational Microservices
+## Rational Microservices (#rational-microservices)
 
-## Don't Write New Software
+TODO
+
+## Don't Write New Software (#new-software)
+
+TODO
+
+### Don't Fork Existing Software (#forked-software)
+
+TODO
 
 # Implementation
+
+TODO
 
 ## Dynamic Languages (#dynamic-languages)
 
