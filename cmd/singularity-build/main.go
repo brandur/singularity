@@ -15,6 +15,7 @@ import (
 	"github.com/brandur/sorg/assets"
 	"github.com/brandur/sorg/markdown"
 	"github.com/brandur/sorg/pool"
+	"github.com/brandur/sorg/toc"
 	"github.com/joeshaw/envdecode"
 	"github.com/yosssi/ace"
 )
@@ -199,8 +200,14 @@ func compileArticle(articleFile string) error {
 	}
 	rendered := markdown.Render(string(source))
 
+	tocContent, err := toc.Render(rendered)
+	if err != nil {
+		return err
+	}
+
 	locals := getLocals(name, map[string]interface{}{
 		"Content": rendered,
+		"TOC":     tocContent,
 	})
 
 	err = renderView(singularity.MainLayout,
