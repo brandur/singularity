@@ -1,7 +1,7 @@
 = doctype html
 html lang=en
   head
-    link rel="stylesheet" href="/assets/{{.Release}}/stylesheets/app.css"
+    link rel="stylesheet" href="/assets/{{.Release}}/app.css"
     = include views/_cardo .
   body
     .container
