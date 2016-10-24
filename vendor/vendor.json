@@ -27,6 +27,12 @@
 			"revisionTime": "2016-10-03T02:48:33Z"
 		},
 		{
+			"checksumSHA1": "fZH06DKLCG6pXZwguR1SUL2tbOc=",
+			"path": "github.com/brandur/sorg/toc",
+			"revision": "52863cb2bb4515c7196f04c354e21f6d4882e077",
+			"revisionTime": "2016-10-22T20:05:47Z"
+		},
+		{
 			"checksumSHA1": "5rPfda8jFccr3A6heL+JAmi9K9g=",
 			"origin": "github.com/stretchr/testify/vendor/github.com/davecgh/go-spew/spew",
 			"path": "github.com/davecgh/go-spew/spew",
@@ -84,6 +90,20 @@
 			"path": "github.com/yosssi/gcss",
 			"revision": "14c175828ad31803b7de184f4214d63f291faad0",
 			"revisionTime": "2016-10-03T02:48:33Z"
+		},
+		{
+			"checksumSHA1": "dcOJtT2YpM6/qNQUa+IGGjFUy0k=",
+			"origin": "github.com/brandur/sorg/vendor/golang.org/x/net/html",
+			"path": "golang.org/x/net/html",
+			"revision": "52863cb2bb4515c7196f04c354e21f6d4882e077",
+			"revisionTime": "2016-10-22T20:05:47Z"
+		},
+		{
+			"checksumSHA1": "BBN+OcVpSYnOYWdUq9A952+dCZA=",
+			"origin": "github.com/brandur/sorg/vendor/golang.org/x/net/html/atom",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "52863cb2bb4515c7196f04c354e21f6d4882e077",
+			"revisionTime": "2016-10-22T20:05:47Z"
 		},
 		{
 			"checksumSHA1": "WhU9tyo+1j8RPRccw4NO4CWuMB0=",
