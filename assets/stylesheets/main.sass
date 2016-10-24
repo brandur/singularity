@@ -8,6 +8,7 @@ html
     color: #222
     font-family: cardo, georgia, serif
     line-height: 1.6em
+    margin: 20px 30px
 
     .container
       font-size: 1rem
@@ -87,10 +88,16 @@ html
     p
       margin: 10px 0
 
-    .section
+    .col-style-1
       column-width: 220px
       -moz-column-width: 220px
       -webkit-column-width: 220px
       column-gap: 30px
       -moz-column-gap: 30px
       -webkit-column-gap: 30px
+
+    .col-style-1 > p:first-of-type:first-letter
+      float: left
+      font-size: 3rem
+      line-height: 0.7em
+      margin: 5px 10px 0 0

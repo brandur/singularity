@@ -2,7 +2,7 @@
 
 ## Critical Thought (#critical-thought)
 
-<div class="section">
+!section class="col-style-1"
 
 Firstly, it's well worthwhile reminding readers of the important of critical
 thought. This is apparently a platitude of the highest order, but in practice,
@@ -17,7 +17,7 @@ Like every other technical publication ever written, this one doesn't have all t
 answers, and contains a healthy dose of idealism. What's preached isn't
 necessarily what's practiced.
 
-</div>
+!/section
 
 ## Application
 
