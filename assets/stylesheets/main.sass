@@ -49,8 +49,8 @@ html
 
   li
     margin-bottom: 15px
-    margin-left: 40px
-    padding-left: 5px
+    margin-left: 20px
+    padding-left: 2px
 
   ol
     list-style-type: decimal
@@ -100,20 +100,12 @@ html
       // TODO: max-width is somehow messing with the height of my flex boxes
       // here and I need a width or the boxes shrink to their smallest possible
       // representations. Need to get this fixed.
-      //max-width: 800px
-      width: 800px
-
-      //column-width: 220px
-      -moz-column-width: 220px
-      //-webkit-column-width: 220px
-      //column-gap: 30px
-      -moz-column-gap: 30px
-      //-webkit-column-gap: 30px
+      max-width: 600px
 
     .col-style-2
-      width: 1000px
+      max-width: 800px
 
-    .col-style-1 > p:first-of-type:first-letter
+    .col-style-1 > p:first-of-type:first-letter, .col-style-2 > p:first-of-type:first-letter
       float: left
       font-size: 3rem
       line-height: 0.7em
