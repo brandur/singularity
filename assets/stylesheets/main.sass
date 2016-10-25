@@ -11,9 +11,8 @@ html
     margin: 20px 30px
 
     .container
-      font-size: 1rem
-      margin: 0 auto
-      max-width: 800px
+      //font-size: 1rem
+      //margin: 0 auto
 
   /*
    * Headers
@@ -85,16 +84,34 @@ html
     font-size: 0.9rem
     line-height: 1.5em
 
+    // flex
+    align-items: center
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+    justify-content: center
+
     p
       margin: 10px 0
 
     .col-style-1
-      column-width: 220px
+      align-self: center
+
+      // TODO: max-width is somehow messing with the height of my flex boxes
+      // here and I need a width or the boxes shrink to their smallest possible
+      // representations. Need to get this fixed.
+      //max-width: 800px
+      width: 800px
+
+      //column-width: 220px
       -moz-column-width: 220px
-      -webkit-column-width: 220px
-      column-gap: 30px
+      //-webkit-column-width: 220px
+      //column-gap: 30px
       -moz-column-gap: 30px
-      -webkit-column-gap: 30px
+      //-webkit-column-gap: 30px
+
+    .col-style-2
+      width: 1000px
 
     .col-style-1 > p:first-of-type:first-letter
       float: left
