@@ -1,3 +1,6 @@
+$sans_serif: helvetica, arial, geneva, sans-serif
+$serif: cardo, georgia, serif
+
 html
   // Root font size. All other sizes with "rem" are relative to this.
   //
@@ -6,7 +9,7 @@ html
 
   body
     color: #222
-    font-family: cardo, georgia, serif
+    font-family: $serif
     line-height: 1.6em
     margin: 20px 30px
 
@@ -19,7 +22,7 @@ html
    */
 
   h1, h2, h3, h4, h5, h6
-    font-family: helvetica, arial, geneva, sans-serif
+    font-family: $sans_serif
     line-height: 1em
 
   h1
@@ -29,6 +32,7 @@ html
     margin: 50px 0 15px 0
 
   h2
+    font-family: $serif
     font-size: 1.55rem
     margin: 30px 0 10px 0
 
@@ -50,7 +54,7 @@ html
   li
     margin-bottom: 15px
     margin-left: 20px
-    padding-left: 2px
+    padding-left: 3px
 
   ol
     list-style-type: decimal
@@ -81,7 +85,7 @@ html
    */
 
   article
-    font-size: 0.9rem
+    /jfont-size: 0.9rem
     line-height: 1.5em
 
     // flex
@@ -95,11 +99,6 @@ html
       margin: 10px 0
 
     .col-style-1
-      align-self: center
-
-      // TODO: max-width is somehow messing with the height of my flex boxes
-      // here and I need a width or the boxes shrink to their smallest possible
-      // representations. Need to get this fixed.
       max-width: 600px
 
     .col-style-2
