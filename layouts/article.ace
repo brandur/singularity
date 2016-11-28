@@ -1,5 +1,5 @@
 = content main
+  .toc
+    {{HTML .TOC}}
   article
-    .toc
-      {{HTML .TOC}}
     {{HTML .Content}}
