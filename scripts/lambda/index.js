@@ -15,8 +15,8 @@ console.log('Loading function.');
 //
 
 // Configuration
-var repository = process.env.REPOSITORY || '';
-var travisToken = process.env.TRAVIS_TOKEN || '';
+var repository = process.env.REPOSITORY;
+var travisToken = process.env.TRAVIS_TOKEN;
 
 var https = require('https');
 
