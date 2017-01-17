@@ -25,12 +25,6 @@ forego run make build
 forego start
 ```
 
-Or an easy all-in-one:
-
-``` sh
-make install && forego run make build && forego start
-```
-
 ## Deployment
 
 The repository will deploy to S3 automatically from the Travis build when
