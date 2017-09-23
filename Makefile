@@ -81,7 +81,7 @@ vet:
 	go vet ./...
 
 watch:
-	fswatch -o articles/ assets/ layouts/ pages/ | xargs -n1 -I{} make build
+	fswatch -o content/ layouts/ views/ | xargs -n1 -I{} make build
 
 # This is designed to be compromise between being explicit and readability. We
 # can allow the find to discover everything in vendor/, but then the fswatch
