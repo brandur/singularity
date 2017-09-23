@@ -15,25 +15,15 @@ const (
 )
 
 const (
-	// ArticlesDir is the location of site articles.
-	ArticlesDir = "./articles"
-
-	// AssetsDir is the location of site static assets (e.g. CSS, images,
-	// etc.).
-	AssetsDir = "./assets"
-
-	// FontsDir is the location of the site web fonts.
-	FontsDir = AssetsDir + "/fonts"
+	// ContentDir is the location of the site's content (articles, fragments,
+	// assets, etc.).
+	ContentDir = "./content"
 
 	// LayoutsDir is the location of site layouts.
 	LayoutsDir = "./layouts"
 
 	// MainLayout is the site's main layout.
 	MainLayout = LayoutsDir + "/main"
-
-	// PagesDir is the location of site static pages (i.e. mostly any page
-	// that isn't an article).
-	PagesDir = "./pages"
 
 	// TargetDir is the location where the site will be built to.
 	TargetDir = "./public"

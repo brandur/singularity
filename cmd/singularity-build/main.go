@@ -11,11 +11,11 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/brandur/singularity"
+	"github.com/brandur/singularity/assets"
+	"github.com/brandur/singularity/markdown"
+	"github.com/brandur/singularity/pool"
 	"github.com/brandur/singularity/templatehelpers"
-	"github.com/brandur/sorg/assets"
-	"github.com/brandur/sorg/markdown"
-	"github.com/brandur/sorg/pool"
-	"github.com/brandur/sorg/toc"
+	"github.com/brandur/singularity/toc"
 	"github.com/joeshaw/envdecode"
 	"github.com/yosssi/ace"
 )
@@ -88,13 +88,13 @@ func main() {
 
 	tasks = append(tasks, pool.NewTask(func() error {
 		return assets.CompileJavascripts(
-			path.Join(singularity.AssetsDir, "javascripts"),
+			path.Join(singularity.ContentDir, "javascripts"),
 			path.Join(versionedAssetsDir, "app.js"))
 	}))
 
 	tasks = append(tasks, pool.NewTask(func() error {
 		return assets.CompileStylesheets(
-			path.Join(singularity.AssetsDir, "stylesheets"),
+			path.Join(singularity.ContentDir, "stylesheets"),
 			path.Join(versionedAssetsDir, "app.css"))
 	}))
 
@@ -122,7 +122,7 @@ func linkFonts() error {
 		log.Debugf("Linked font assets in %v.", time.Now().Sub(start))
 	}()
 
-	source, err := filepath.Abs(singularity.FontsDir)
+	source, err := filepath.Abs(path.Join(singularity.ContentDir, "fonts"))
 	if err != nil {
 		return err
 	}
@@ -141,7 +141,7 @@ func linkImages() error {
 		log.Debugf("Linked image assets in %v.", time.Now().Sub(start))
 	}()
 
-	assets, err := ioutil.ReadDir(singularity.AssetsDir + "/images")
+	assets, err := ioutil.ReadDir(singularity.ContentDir + "/images")
 	if err != nil {
 		return err
 	}
@@ -149,7 +149,7 @@ func linkImages() error {
 	for _, asset := range assets {
 		// we use absolute paths for source and destination because not doing
 		// so can result in some weird symbolic link inception
-		source, err := filepath.Abs(singularity.AssetsDir + "/images/" + asset.Name())
+		source, err := filepath.Abs(singularity.ContentDir + "/images/" + asset.Name())
 		if err != nil {
 			return err
 		}
@@ -173,11 +173,11 @@ func compileArticle(articleFile string) error {
 	log.Debugf("Rendering article: %v", name)
 
 	source, err :=
-		ioutil.ReadFile(path.Join(singularity.ArticlesDir, articleFile))
+		ioutil.ReadFile(path.Join(singularity.ContentDir, "articles", articleFile))
 	if err != nil {
 		return err
 	}
-	rendered := markdown.Render(string(source))
+	rendered := markdown.Render(string(source), nil)
 
 	tocContent, err := toc.Render(rendered)
 	if err != nil {
@@ -207,7 +207,7 @@ func compileArticle(articleFile string) error {
 //
 
 func tasksForArticles() ([]*pool.Task, error) {
-	files, err := ioutil.ReadDir(singularity.ArticlesDir)
+	files, err := ioutil.ReadDir(path.Join(singularity.ContentDir, "articles"))
 	if err != nil {
 		return nil, err
 	}

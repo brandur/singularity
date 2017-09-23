@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/brandur/singularity"
-	"github.com/brandur/sorg/pool"
+	"github.com/brandur/singularity/pool"
 	assert "github.com/stretchr/testify/require"
 )
 
