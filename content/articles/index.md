@@ -1,6 +1,8 @@
-# Foreword
+# The Self-hosting Singularity
 
-## Critical Thought (#critical-thought)
+## Foreword (#foreword)
+
+### Critical Thought (#critical-thought)
 
 Firstly, it's well worthwhile reminding readers of the important of critical
 thought. This is apparently a platitude of the highest order, but in practice,
@@ -30,7 +32,7 @@ landscape at any organization may reveal that
 
 Abstract concepts.
 
-## The Walk Away Test (#walk-away-test)
+### The Walk Away Test (#walk-away-test)
 
 Most uninitiated users of Intenet services take stability for granted. A
 website is a website, and opening amazon.com looks no different than
@@ -75,38 +77,38 @@ architecture, dead simple deployment (say a set of HTML files stored in S3),
 heavy reliance on external operations services (like Heroku), it's quite
 possible for them to stay online even if their owners are absent for years.
 
-## The Skeleton Crew (#skeleton-crew)
+### The Skeleton Crew (#skeleton-crew)
 
 A basic question
 
 How many people are spending most of their days staving off disasters versus
 working on new things?
 
-# Risks (#risks)
+## Risks (#risks)
 
 TODO
 
-## Time (#time)
+### Time (#time)
 
 TODO
 
-## Entropy (#entropy)
+### Entropy (#entropy)
 
 TODO
 
-## Bitrot (#bitrot)
+### Bitrot (#bitrot)
 
 TODO
 
-# Techniques (#techniques)
+## Techniques (#techniques)
 
 TODO
 
-## Run Less (#run-less)
+### Run Less (#run-less)
 
 TODO
 
-## Embrace Ephemerality (#ephemerality)
+### Embrace Ephemerality (#ephemerality)
 
 Use services. Don't do anything yourself if you can avoid it.
 
@@ -123,11 +125,11 @@ Engineers should have close to an allergic reaction when somebody suggests
 running a new type of component in-house, even if it's a technology that's
 exciting and known to be mostly stable (e.g. Kafka).
 
-## Reduce Moving Parts (#moving-parts)
+### Reduce Moving Parts (#moving-parts)
 
 TODO
 
-### Static Sites (#static-sites)
+#### Static Sites (#static-sites)
 
 Static sites may be the ultimate form of minimalism when it comes to web
 services. They're cheap to run computationally and will handle even the largest
@@ -140,30 +142,30 @@ can still have its company's blog, marketing pages, and status site easily made
 into 
 
 
-### Slinky (#slinky)
+#### Slinky (#slinky)
 
 TODO
 
-## Inject Chaos (#inject-chaos)
+### Inject Chaos (#inject-chaos)
 
 * The Netflix chaos monkey.
 
-## Rational Microservices (#rational-microservices)
+### Rational Microservices (#rational-microservices)
 
 TODO
 
-## Don't Write New Software (#new-software)
+### Don't Write New Software (#new-software)
 
 TODO
 
-### Don't Fork Existing Software (#forked-software)
+#### Don't Fork Existing Software (#forked-software)
 
 TODO
 
-# Implementation (#implementation)
+## Implementation (#implementation)
 
 TODO
 
-## Dynamic Languages (#dynamic-languages)
+### Dynamic Languages (#dynamic-languages)
 
 Consider not using them.
