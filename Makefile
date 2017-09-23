@@ -63,7 +63,7 @@ else
 endif
 
 install:
-	go install $(shell go list ./... | grep -v '/vendor/')
+	go install ./...
 
 lint:
 	$(GOPATH)/bin/golint -set_exit_status
@@ -72,10 +72,10 @@ serve:
 	$(GOPATH)/bin/singularity-serve
 
 test:
-	go test $(shell go list ./... | grep -v '/vendor/')
+	go test ./...
 
 vet:
-	go vet $(shell go list ./... | grep -v '/vendor/')
+	go vet ./...
 
 watch:
 	fswatch -o articles/ assets/ layouts/ pages/ | xargs -n1 -I{} make build
