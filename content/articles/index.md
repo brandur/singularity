@@ -2,8 +2,6 @@
 
 ## Critical Thought (#critical-thought)
 
-!section class="col-style-1"
-
 Firstly, it's well worthwhile reminding readers of the important of critical
 thought. This is apparently a platitude of the highest order, but in practice,
 technical articles are one place where otherwise great critical thinkers often
@@ -17,11 +15,7 @@ Like every other technical publication ever written, this one doesn't have all t
 answers, and contains a healthy dose of idealism. What's preached isn't
 necessarily what's practiced.
 
-!/section
-
 ## Application (#application)
-
-!section class="col-style-2"
 
 The ideas contained in this publication are not necessarily universally
 applicable. There are cases where services will need to be close to hardware,
@@ -32,19 +26,11 @@ However, a cautious architect would be wise not to discount anything wholesale.
 Re-examing assumptions that are firmly concreted into the shared mental
 landscape at any organization may reveal that 
 
-!/section
-
-# Introduction (#introduction)
-
-!section class="col-style-1"
+## Introduction (#introduction)
 
 Abstract concepts.
 
-!/section
-
 ## The Walk Away Test (#walk-away-test)
-
-!section class="col-style-1"
 
 Most uninitiated users of Intenet services take stability for granted. A
 website is a website, and opening amazon.com looks no different than
@@ -89,70 +75,38 @@ architecture, dead simple deployment (say a set of HTML files stored in S3),
 heavy reliance on external operations services (like Heroku), it's quite
 possible for them to stay online even if their owners are absent for years.
 
-!/section
-
 ## The Skeleton Crew (#skeleton-crew)
-
-!section class="col-style-1"
 
 A basic question
 
 How many people are spending most of their days staving off disasters versus
 working on new things?
 
-!/section
-
 # Risks (#risks)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ## Time (#time)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ## Entropy (#entropy)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ## Bitrot (#bitrot)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 # Techniques (#techniques)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ## Run Less (#run-less)
 
-!section class="col-style-1"
-
 TODO
 
-!/section
-
 ## Embrace Ephemerality (#ephemerality)
-
-!section class="col-style-1"
 
 Use services. Don't do anything yourself if you can avoid it.
 
@@ -169,19 +123,11 @@ Engineers should have close to an allergic reaction when somebody suggests
 running a new type of component in-house, even if it's a technology that's
 exciting and known to be mostly stable (e.g. Kafka).
 
-!/section
-
 ## Reduce Moving Parts (#moving-parts)
-
-!section class="col-style-1"
 
 TODO
 
-!/section
-
 ### Static Sites (#static-sites)
-
-!section class="col-style-1"
 
 Static sites may be the ultimate form of minimalism when it comes to web
 services. They're cheap to run computationally and will handle even the largest
@@ -194,60 +140,30 @@ can still have its company's blog, marketing pages, and status site easily made
 into 
 
 
-!/section
-
 ### Slinky (#slinky)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ## Inject Chaos (#inject-chaos)
 
-!section class="col-style-1"
-
 * The Netflix chaos monkey.
-
-!/section
 
 ## Rational Microservices (#rational-microservices)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ## Don't Write New Software (#new-software)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ### Don't Fork Existing Software (#forked-software)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 # Implementation (#implementation)
 
-!section class="col-style-1"
-
 TODO
-
-!/section
 
 ## Dynamic Languages (#dynamic-languages)
 
-!section class="col-style-1"
-
 Consider not using them.
-
-!/section
