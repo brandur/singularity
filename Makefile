@@ -1,10 +1,13 @@
-all: clean install test vet lint check-gofmt build
+all: clean install test vet lint check-gofmt check-headers build
 
 build:
 	$(GOPATH)/bin/singularity-build
 
 check-gofmt:
 	scripts/check_gofmt.sh
+
+check-headers:
+	scripts/check_headers.sh
 
 clean:
 	mkdir -p public/

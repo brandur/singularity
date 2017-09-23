@@ -19,7 +19,7 @@ necessarily what's practiced.
 
 !/section
 
-## Application
+## Application (#application)
 
 !section class="col-style-2"
 
@@ -34,7 +34,7 @@ landscape at any organization may reveal that
 
 !/section
 
-# Introduction
+# Introduction (#introduction)
 
 !section class="col-style-1"
 
@@ -102,7 +102,7 @@ working on new things?
 
 !/section
 
-# Risks
+# Risks (#risks)
 
 !section class="col-style-1"
 
@@ -134,7 +134,7 @@ TODO
 
 !/section
 
-# Techniques
+# Techniques (#techniques)
 
 !section class="col-style-1"
 
@@ -236,7 +236,7 @@ TODO
 
 !/section
 
-# Implementation
+# Implementation (#implementation)
 
 !section class="col-style-1"
 
