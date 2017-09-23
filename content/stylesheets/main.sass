@@ -1,21 +1,24 @@
 $sans_serif: helvetica, arial, geneva, sans-serif
 $serif: cardo, georgia, serif
 
+$color_highlight: #222
+$color_primary: #4d4d4d
+$color_secondary: #5d5d5d
+
 html
   // Root font size. All other sizes with "rem" are relative to this.
-  //
-  // This corresponds to the default font size of 16px.
-  font-size: 100%
+  font-size: 17px
 
   body
     background: #fff url("/assets/mountain.png") no-repeat
-    color: #222
-    font-family: $serif
+    color: $color_primary
+    font-family: $sans_serif
+    font-weight: 300
     line-height: 1.6em
     margin: 20px 30px
 
   a
-    color: #222
+    color: $color_highlight
     text-decoration: underline
 
     &:hover
@@ -36,24 +39,29 @@ html
       text-decoration: none
 
   h1
-    color: #222
+    color: $color_highlight
     font-size: 6.25rem
-    letter-spacing: -6px
+    font-weight: normal
+    letter-spacing: -8px
     margin: 50px 0 15px 0
 
   h2
     font-family: $serif
     font-size: 4.5rem
-    letter-spacing: -4px
+    letter-spacing: -5px
     margin: 30px 0
     text-align: center
 
   h3
+    font-family: $serif
     font-size: 1.25rem
+    letter-spacing: -1px
     margin: 30px 0 10px 0
 
   h4
+    font-family: $serif
     font-size: 1.05rem
+    letter-spacing: -0.5px
     margin: 30px 0 10px 0
 
   /*
@@ -130,8 +138,6 @@ html
 
     .sidebar
       flex: 1 1 auto
-      font-size: 0.8rem
-      line-height: 1.2em
       margin: 0 60px 0 0
       min-width: 160px
 
@@ -140,18 +146,51 @@ html
         position: sticky
 
         // Top is required for sticky
-        top: 50px
+        top: 100px
 
+        // h2
         ol
+          font-size: 0.8rem
+          font-weight: normal
+          line-height: 1.3em
           margin: 20px 0
 
           li
             margin-bottom: 8px
 
+            // h3
+            ol
+              color: $color_primary
+              font-size: 0.65rem
+              margin: 15px 0
+
+              li
+                a
+                  color: $color_primary
+
+                // h4
+                ol
+                  color: $color_secondary
+                  font-size: 0.6rem
+                  margin: 10px 0
+
+                  li
+                    margin-bottom: 4px
+
+                    a
+                      color: $color_secondary
+
           li.collapsed
 
           li.collapsed > ol
             display: none
+
+        .toc-title
+          color: #000
+          font-size: 0.7rem
+          font-weight: bold
+          letter-spacing: -1px
+          text-transform: uppercase
 
     article
       p

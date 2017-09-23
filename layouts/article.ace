@@ -4,6 +4,7 @@
   .container
     .sidebar
       .toc
+        .toc-title Table of Contents
         {{HTML .TOC}}
     article
       {{HTML .Content}}
