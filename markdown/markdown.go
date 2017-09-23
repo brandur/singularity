@@ -60,7 +60,7 @@ func collapseHTML(html string) string {
 }
 
 func renderMarkdown(source string, options *RenderOptions) string {
-	return string(blackfriday.MarkdownCommon([]byte(source)))
+	return string(blackfriday.Run([]byte(source)))
 }
 
 var codeRE = regexp.MustCompile(`<code class="(\w+)">`)
