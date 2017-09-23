@@ -123,13 +123,25 @@ html
     width: 100%
 
   .title
-    height: 500px
+    align-items: top
+    display: flex
+    height: 550px
+    justify-content: center
     width: 100%
 
-    h1
-      margin: 0 auto
-      text-align: center
-      width: 500px
+    .title-inner
+      h1
+        margin: 30px auto
+        max-width: 700px
+        text-align: center
+
+      p.subtitle
+        color: $color_highlight
+        font-size: 0.75rem
+        font-weight: bold
+        letter-spacing: -0.5px
+        text-align: center
+        text-transform: uppercase
 
   .container
     display: flex

@@ -1,6 +1,8 @@
 = content main
   .title
-    h1 The Self-hosting Singularity
+    .title-inner
+      h1 The Self-hosting Singularity
+      p.subtitle A manifesto for writing software resistant to time and entropy.
   .container
     .sidebar
       .toc
