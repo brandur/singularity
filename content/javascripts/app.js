@@ -29,5 +29,5 @@ function isInView(el) {
   return el.getBoundingClientRect().top <= 0
 }
 
-window.addEventListener('load', e => activateTOCItem(-1))
+window.addEventListener('load', e => activate())
 window.addEventListener('scroll', e => activate())
