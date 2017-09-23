@@ -8,14 +8,11 @@ html
   font-size: 100%
 
   body
+    background: #fff url("/assets/mountain.png") no-repeat
     color: #222
     font-family: $serif
     line-height: 1.6em
     margin: 20px 30px
-
-    .container
-      //font-size: 1rem
-      //margin: 0 auto
 
   a
     color: #222
@@ -99,31 +96,68 @@ html
    * Article
    */
 
-  .toc
-    float: left
-    font-size: 0.8rem
-    line-height: 1.2em
-    width: 140px
+  .ring
+    background: #fff url("/assets/ring.png") no-repeat center center
+    height: 200px
+    margin: 50px 0
+    width: 100%
 
-    ol
-      margin: 20px 0
+  .title
+    height: 500px
+    width: 100%
 
-      li
-        margin-bottom: 8px
+    h1
+      margin: 0 auto
+      text-align: center
+      width: 500px
 
-  article
-    // flex
-    align-items: center
+  .container
     display: flex
-    flex-direction: column
-    flex-wrap: wrap
-    justify-content: center
+    margin: 0 auto
+    width: 800px
 
-    p
-      margin: 10px 0
+    .sidebar
+      flex: 1 1 auto
+      font-size: 0.8rem
+      line-height: 1.2em
+      margin: 0 60px 0 0
+      min-width: 160px
 
-    p:first-of-type:first-letter
-      float: left
-      font-size: 4rem
-      line-height: 0.7em
-      margin: 5px 10px 2px 0
+      .toc
+        position: -webkit-sticky
+        position: sticky
+
+        // Top is required for sticky
+        top: 50px
+
+        ol
+          margin: 20px 0
+
+          li
+            margin-bottom: 8px
+
+          li.collapsed
+
+          li.collapsed > ol
+            display: none
+
+    article
+      p
+        margin: 10px 0
+
+      p:first-of-type:first-letter
+        float: left
+        font-size: 4rem
+        line-height: 0.7em
+        margin: 5px 10px 2px 0
+
+@media all and (-webkit-min-device-pixel-ratio: 1.5)
+  html
+    body
+      background: #fff url("/assets/mountain@2x.png") no-repeat
+      background-size: 600px 602px
+
+    .ring
+      background: #fff url("/assets/ring@2x.png") no-repeat center center
+      background-size: 200px 200px
+

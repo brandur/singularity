@@ -1,5 +1,3 @@
-# The Self-hosting Singularity
-
 ## Foreword (#foreword)
 
 ### Critical Thought (#critical-thought)
@@ -16,6 +14,8 @@ Historical context reveals that none of these technologies turned out to be abso
 Like every other technical publication ever written, this one doesn't have all the
 answers, and contains a healthy dose of idealism. What's preached isn't
 necessarily what's practiced.
+
+<div class="ring"></div>
 
 ## Application (#application)
 
@@ -84,6 +84,8 @@ A basic question
 How many people are spending most of their days staving off disasters versus
 working on new things?
 
+<div class="ring"></div>
+
 ## Risks (#risks)
 
 TODO
@@ -99,6 +101,8 @@ TODO
 ### Bitrot (#bitrot)
 
 TODO
+
+<div class="ring"></div>
 
 ## Techniques (#techniques)
 
@@ -161,6 +165,8 @@ TODO
 #### Don't Fork Existing Software (#forked-software)
 
 TODO
+
+<div class="ring"></div>
 
 ## Implementation (#implementation)
 

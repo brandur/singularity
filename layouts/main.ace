@@ -2,7 +2,7 @@
 html lang=en
   head
     link rel="stylesheet" href="/assets/{{.Release}}/app.css"
+    script src="/assets/{{.Release}}/app.js"
     = include views/_cardo .
   body
-    .container
-      = yield main
+    = yield main

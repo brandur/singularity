@@ -1,5 +1,9 @@
 = content main
-  .toc
-    {{HTML .TOC}}
-  article
-    {{HTML .Content}}
+  .title
+    h1 The Self-hosting Singularity
+  .container
+    .sidebar
+      .toc
+        {{HTML .TOC}}
+    article
+      {{HTML .Content}}
