@@ -48,21 +48,6 @@ type Conf struct {
 // very many places and can probably be refactored as a local if desired.
 var conf Conf
 
-// pagesVars contains meta information for static pages that are part of the
-// site. This mostly titles, but can also be body classes for custom styling.
-//
-// This isn't the best system, but was the cheapest way to accomplish what I
-// needed for the time being. It could probably use an overhaul to something
-// better at some point.
-var pagesVars = map[string]map[string]interface{}{
-	"about": {
-		"Title": "About",
-	},
-	"index": {
-		"Title": "The Self Hosting Singularity",
-	},
-}
-
 //
 // Main
 //
@@ -118,12 +103,6 @@ func main() {
 		log.Fatal(err)
 	}
 	tasks = append(tasks, articleTasks...)
-
-	pageTasks, err := tasksForPages()
-	if err != nil {
-		log.Fatal(err)
-	}
-	tasks = append(tasks, pageTasks...)
 
 	if !runTasks(tasks) {
 		os.Exit(1)
@@ -220,43 +199,6 @@ func compileArticle(articleFile string) error {
 	return nil
 }
 
-func compilePage(dir, name string) error {
-	// Remove the "./pages" directory, but keep the rest of the path.
-	//
-	// Looks something like "about".
-	pagePath := strings.TrimPrefix(dir, singularity.PagesDir) + name
-
-	// Looks something like "./public/about".
-	target := path.Join(singularity.TargetDir, pagePath)
-
-	// Put a ".html" on if this page is an index. This will allow our local
-	// server to serve it at a directory path, and our upload script is smart
-	// enough to do the right thing with it as well.
-	if path.Base(pagePath) == "index" {
-		target += ".html"
-	}
-
-	locals, ok := pagesVars[pagePath]
-	if !ok {
-		log.Errorf("No page meta information: %v", pagePath)
-	}
-
-	locals = getLocals("Page", locals)
-
-	err := os.MkdirAll(path.Join(singularity.TargetDir, dir), 0755)
-	if err != nil {
-		return err
-	}
-
-	err = renderView(singularity.MainLayout, path.Join(dir, name),
-		target, locals)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 //
 // Task generation functions
 //
@@ -282,39 +224,6 @@ func tasksForArticles() ([]*pool.Task, error) {
 		tasks = append(tasks, pool.NewTask(func() error {
 			return compileArticle(name)
 		}))
-	}
-
-	return tasks, nil
-}
-
-func tasksForPages() ([]*pool.Task, error) {
-	return tasksForPagesDir(singularity.PagesDir)
-}
-
-func tasksForPagesDir(dir string) ([]*pool.Task, error) {
-	log.Debugf("Descending into pages directory: %v", dir)
-
-	files, err := ioutil.ReadDir(singularity.PagesDir)
-	if err != nil {
-		return nil, err
-	}
-
-	var tasks []*pool.Task
-	for _, fileInfo := range files {
-		// be careful with closures in loops
-		name := fileInfo.Name()
-
-		if fileInfo.IsDir() {
-			subtasks, err := tasksForPagesDir(dir + name)
-			if err != nil {
-				return nil, err
-			}
-			tasks = append(tasks, subtasks...)
-		} else {
-			tasks = append(tasks, pool.NewTask(func() error {
-				return compilePage(dir, trimExtension(name))
-			}))
-		}
 	}
 
 	return tasks, nil
