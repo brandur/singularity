@@ -1,22 +1,12 @@
 /**
- * Check if `el` is out out of view.
+ * Expand the right TOC item based on the content which the user is reading.
  */
-
-function isBelowScroll(el) {
-  return el.getBoundingClientRect().top > 0
-}
-
-/**
- * Activate the correct menu item for the
- * contents in the viewport.
- */
-
 function activate() {
   const headers = document.querySelectorAll('h2')
   let i = 0
 
   for (; i < headers.length; i++) {
-    if (isBelowScroll(headers[i])) {
+    if (!isInView(headers[i])) {
       break
     }
   }
@@ -33,6 +23,10 @@ function activateTOCItem(i) {
   }
 
   tocItems[i].classList.remove('collapsed')
+}
+
+function isInView(el) {
+  return el.getBoundingClientRect().top <= 0
 }
 
 window.addEventListener('load', e => activateTOCItem(-1))
