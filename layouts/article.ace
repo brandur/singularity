@@ -10,3 +10,6 @@
         {{HTML .TOC}}
     article
       {{HTML .Content}}
+  .footer
+    .footer-inner
+      p You've just finished reading <em>The Self-hosting Singularity</em>.
