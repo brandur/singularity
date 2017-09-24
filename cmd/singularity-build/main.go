@@ -189,9 +189,16 @@ func compileArticle(articleFile string) error {
 		"TOC":     tocContent,
 	})
 
+	// Give index files an .html extension so that they'll be served locally
+	// from directory-level requests instead of a directory listing.
+	out := name
+	if name == "index" {
+		out = name + ".html"
+	}
+
 	err = renderView(singularity.MainLayout,
 		path.Join(singularity.LayoutsDir, "article"),
-		path.Join(singularity.TargetDir, name), locals)
+		path.Join(singularity.TargetDir, out), locals)
 	if err != nil {
 		return err
 	}
