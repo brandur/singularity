@@ -2,6 +2,7 @@ $sans_serif: helvetica, arial, geneva, sans-serif
 $serif: cardo, georgia, serif
 
 $color_highlight: #222
+
 $color_primary: #4d4d4d
 $color_secondary: #5d5d5d
 
@@ -164,9 +165,11 @@ html
 
         // h2
         ol
-          font-size: 0.8rem
+          color: $color_secondary
+          font-size: 0.75rem
           font-weight: normal
           line-height: 1.3em
+          list-style-type: lower-roman
           margin: 10px 0
 
           li
@@ -174,11 +177,14 @@ html
 
             // h3
             ol
-              color: $color_primary
+              color: $color_secondary
               font-size: 0.65rem
-              margin: 15px 0
+              list-style-type: decimal
+              margin: 12px 0
 
               li
+                margin-bottom: 6px
+
                 a
                   color: $color_primary
 
@@ -186,10 +192,11 @@ html
                 ol
                   color: $color_secondary
                   font-size: 0.6rem
+                  list-style-type: lower-alpha
                   margin: 10px 0
 
                   li
-                    margin-bottom: 4px
+                    margin-bottom: 3px
 
                     a
                       color: $color_secondary
