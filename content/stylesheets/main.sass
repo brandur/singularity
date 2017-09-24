@@ -262,6 +262,14 @@ html
       background: #fff url("/assets/ring@2x.png") no-repeat center center
       background-size: 200px 200px
 
+// If the window is narrow enough so that the background has significant
+// overlap with the title, give the content a semi-opaque white background to
+// fade it out a bit so that the page is more legible.
+@media handheld, only screen and (max-width: 900px), only screen and (max-device-width: 900px)
+  html
+    .title, .container
+      background: rgba(255, 255, 255, 0.4)
+
 @media handheld, only screen and (max-width: 650px), only screen and (max-device-width: 650px)
   html
     .container
