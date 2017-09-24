@@ -157,9 +157,9 @@ html
 
     .sidebar
       flex: 1 1 auto
-      // Bottom margin is for width-constrained layout to position it above
-      // main text
-      margin: 0 30px 40px 0
+      // Top and bottom margins are for width-constrained layout to position it
+      // above main text
+      margin: 30px 30px 30px 0
       min-width: 160px
 
       .toc
@@ -175,7 +175,7 @@ html
           font-size: 0.75rem
           font-weight: normal
           line-height: 1.3em
-          list-style-type: lower-roman
+          list-style-type: upper-roman
           margin: 10px 0
 
           li
@@ -192,7 +192,7 @@ html
                 margin-bottom: 6px
 
                 a
-                  color: $color_primary
+                  color: $color_highlight
 
                 // h4
                 ol
@@ -205,7 +205,7 @@ html
                     margin-bottom: 3px
 
                     a
-                      color: $color_secondary
+                      color: $color_primary
 
           li.collapsed
 
