@@ -34,6 +34,9 @@ html
 
   h1, h2, h3, h4, h5, h6
     font-family: $sans_serif
+    hyphens: auto
+    -moz-hyphens: auto
+    -webkit-hyphens: auto
     line-height: 1em
 
     a, a:visited
@@ -149,17 +152,17 @@ html
   .container
     display: flex
     margin: 0 auto
+    padding: 0 20px
     max-width: 800px
 
     .sidebar
       flex: 1 1 auto
       // Bottom margin is for width-constrained layout to position it above
       // main text
-      margin: 0 20px 40px 0
+      margin: 0 30px 40px 0
       min-width: 160px
 
       .toc
-        //margin: 0 auto
         position: -webkit-sticky
         position: sticky
 
@@ -247,7 +250,7 @@ html
       background: #fff url("/assets/ring@2x.png") no-repeat center center
       background-size: 200px 200px
 
-@media handheld, only screen and (max-width: 767px), only screen and (max-device-width: 767px)
+@media handheld, only screen and (max-width: 650px), only screen and (max-device-width: 650px)
   html
     .container
       flex-direction: column
