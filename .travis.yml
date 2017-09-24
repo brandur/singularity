@@ -13,7 +13,8 @@ install:
   - pip install --user awscli
 
 script:
-  - make VERBOSE=true
+  - VERBOSE=true make
+  - TARGET_DIR=./public S3_BUCKET=singularity.brandur.org make deploy
 
 notifications:
   email:
