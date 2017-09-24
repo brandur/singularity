@@ -149,14 +149,17 @@ html
   .container
     display: flex
     margin: 0 auto
-    width: 800px
+    max-width: 800px
 
     .sidebar
       flex: 1 1 auto
-      margin: 0 60px 0 0
+      // Bottom margin is for width-constrained layout to position it above
+      // main text
+      margin: 0 20px 40px 0
       min-width: 160px
 
       .toc
+        //margin: 0 auto
         position: -webkit-sticky
         position: sticky
 
@@ -215,7 +218,7 @@ html
 
     article
       p
-        margin: 10px 0
+        margin: 18px 0
 
       // next p sibling of h2, and the first letter within it
       h2 + p:first-letter
@@ -243,3 +246,8 @@ html
     .ring
       background: #fff url("/assets/ring@2x.png") no-repeat center center
       background-size: 200px 200px
+
+@media handheld, only screen and (max-width: 767px), only screen and (max-device-width: 767px)
+  html
+    .container
+      flex-direction: column
