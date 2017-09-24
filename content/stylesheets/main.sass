@@ -167,7 +167,7 @@ html
           font-size: 0.8rem
           font-weight: normal
           line-height: 1.3em
-          margin: 20px 0
+          margin: 10px 0
 
           li
             margin-bottom: 8px
@@ -210,11 +210,14 @@ html
       p
         margin: 10px 0
 
-      p:first-of-type:first-letter
+      // next p sibling of h2, and the first letter within it
+      h2 + p:first-letter
+        color: $color_highlight
         float: left
-        font-size: 4rem
+        font-size: 5.5rem
+        font-weight: normal
         line-height: 0.7em
-        margin: 5px 10px 2px 0
+        margin: 5px 10px 0 0
 
 @media all and (-webkit-min-device-pixel-ratio: 1.5)
   html
