@@ -12,6 +12,10 @@ html
 
   body
     background: #fff url("/assets/mountain.png") no-repeat
+    background-size: 900px 903px
+    // Smaller version -- also looks pretty cool and maybe better
+    //background: #fff url("/assets/mountain.png") no-repeat
+    //background-size: 600px 602px
     color: $color_primary
     font-family: $sans_serif
     font-weight: 300
@@ -145,11 +149,15 @@ html
         font-size: 0.75rem
         font-weight: bold
         letter-spacing: -0.5px
+        line-height: 1.5em
+        margin: 0 auto
+        max-width: 300px
         text-align: center
         text-transform: uppercase
         text-shadow: 0 0 2px #fff
 
   .container
+    background: rgba(255, 255, 255, 0.6)
     display: flex
     margin: 0 auto
     padding: 0 20px
@@ -248,7 +256,10 @@ html
   html
     body
       background: #fff url("/assets/mountain@2x.png") no-repeat
-      background-size: 600px 602px
+      background-size: 900px 903px
+      // Smaller version -- also looks pretty cool and maybe better
+      //background: #fff url("/assets/mountain@2x.png") no-repeat
+      //background-size: 600px 602px
 
     .blot
       background: #fff url("/assets/blot@2x.png") no-repeat center center
@@ -267,8 +278,8 @@ html
 // fade it out a bit so that the page is more legible.
 @media handheld, only screen and (max-width: 900px), only screen and (max-device-width: 900px)
   html
-    .title, .container
-      background: rgba(255, 255, 255, 0.4)
+    .title
+      background: rgba(255, 255, 255, 0.6)
 
 @media handheld, only screen and (max-width: 650px), only screen and (max-device-width: 650px)
   html
