@@ -18,6 +18,7 @@ var renderFuncs = []func(string, *RenderOptions) string{
 	renderMarkdown,
 
 	// post-transformations
+	addSpacingDivs,
 	transformCodeWithLanguagePrefix,
 	transformFootnotes,
 	transformImagesToRetina,
@@ -43,6 +44,38 @@ func Render(source string, options *RenderOptions) string {
 		source = f(source, options)
 	}
 	return source
+}
+
+var h2RE = regexp.MustCompile(`<h2`)
+var h3RE = regexp.MustCompile(`<h3`)
+
+// Puts a ring before every h2 except the first and a brush stroke before every
+// h3 except the first.
+func addSpacingDivs(source string, options *RenderOptions) string {
+	var first bool
+	res := source
+
+	first = true
+	res = h2RE.ReplaceAllStringFunc(res, func(header string) string {
+		if !first {
+			return "<div class=\"ring\"></div>\n\n" + header
+		} else {
+			first = false
+			return header
+		}
+	})
+
+	first = true
+	res = h3RE.ReplaceAllStringFunc(res, func(header string) string {
+		if !first {
+			return "<div class=\"brush\"></div>\n\n" + header
+		} else {
+			first = false
+			return header
+		}
+	})
+
+	return res
 }
 
 // Look for any whitespace between HTML tags.

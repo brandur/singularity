@@ -21,6 +21,38 @@ func TestRenderMarkdown(t *testing.T) {
 	assert.Equal(t, "<p><strong>strong</strong></p>\n", renderMarkdown("**strong**", nil))
 }
 
+func TestAddSpacingDivs(t *testing.T) {
+	// note that the first one is not replaced
+	assert.Equal(t, `
+<h2 id="xx">header a</h2>
+
+<div class="ring"></div>
+
+<h2 id="xx">header b</h2>
+`,
+		addSpacingDivs(`
+<h2 id="xx">header a</h2>
+
+<h2 id="xx">header b</h2>
+`, nil),
+	)
+
+	// note that the first one is not replaced
+	assert.Equal(t, `
+<h3 id="xx">header a</h3>
+
+<div class="brush"></div>
+
+<h3 id="xx">header b</h3>
+`,
+		addSpacingDivs(`
+<h3 id="xx">header a</h3>
+
+<h3 id="xx">header b</h3>
+`, nil),
+	)
+}
+
 func TestTransformCodeWithLanguagePrefix(t *testing.T) {
 	assert.Equal(t,
 		`<code class="language-ruby">`,

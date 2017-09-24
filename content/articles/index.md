@@ -15,8 +15,6 @@ Like every other technical publication ever written, this one doesn't have all t
 answers, and contains a healthy dose of idealism. What's preached isn't
 necessarily what's practiced.
 
-<div class="ring"></div>
-
 ## Application (#application)
 
 The ideas contained in this publication are not necessarily universally
@@ -28,13 +26,9 @@ However, a cautious architect would be wise not to discount anything wholesale.
 Re-examing assumptions that are firmly concreted into the shared mental
 landscape at any organization may reveal that 
 
-<div class="ring"></div>
-
 ## Introduction (#introduction)
 
 Abstract concepts.
-
-<div class="brush"></div>
 
 ### The Walk Away Test (#walk-away-test)
 
@@ -81,8 +75,6 @@ architecture, dead simple deployment (say a set of HTML files stored in S3),
 heavy reliance on external operations services (like Heroku), it's quite
 possible for them to stay online even if their owners are absent for years.
 
-<div class="brush"></div>
-
 ### The Skeleton Crew (#skeleton-crew)
 
 A basic question
@@ -90,43 +82,29 @@ A basic question
 How many people are spending most of their days staving off disasters versus
 working on new things?
 
-<div class="ring"></div>
-
 ## Risks (#risks)
 
 TODO
-
-<div class="brush"></div>
 
 ### Time (#time)
 
 TODO
 
-<div class="brush"></div>
-
 ### Entropy (#entropy)
 
 TODO
-
-<div class="brush"></div>
 
 ### Bitrot (#bitrot)
 
 TODO
 
-<div class="ring"></div>
-
 ## Techniques (#techniques)
 
 TODO
 
-<div class="brush"></div>
-
 ### Run Less (#run-less)
 
 TODO
-
-<div class="brush"></div>
 
 ### Embrace Ephemerality (#ephemerality)
 
@@ -144,8 +122,6 @@ consider how it gets upgrade and maintained over the next five years.
 Engineers should have close to an allergic reaction when somebody suggests
 running a new type of component in-house, even if it's a technology that's
 exciting and known to be mostly stable (e.g. Kafka).
-
-<div class="brush"></div>
 
 ### Reduce Moving Parts (#moving-parts)
 
@@ -168,19 +144,13 @@ into
 
 TODO
 
-<div class="brush"></div>
-
 ### Inject Chaos (#inject-chaos)
 
 * The Netflix chaos monkey.
 
-<div class="brush"></div>
-
 ### Rational Microservices (#rational-microservices)
 
 TODO
-
-<div class="brush"></div>
 
 ### Don't Write New Software (#new-software)
 
@@ -190,13 +160,9 @@ TODO
 
 TODO
 
-<div class="ring"></div>
-
 ## Implementation (#implementation)
 
 TODO
-
-<div class="brush"></div>
 
 ### Dynamic Languages (#dynamic-languages)
 
