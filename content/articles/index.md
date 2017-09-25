@@ -1,3 +1,32 @@
+Software is all around us. It powers the channels we use to
+communicate with friends and family, the grids that
+energize our cities, the probes that we send into deep
+space, and more and more the very homes that we live in.
+With every passing day it eats a little more of our world.
+
+Software is often an intricately-built machine that's made
+up of tens of thousands or even millions of lines of code.
+This intricacy leads to complexity, and complexity leads to
+fragility. We're used to software handling the most
+difficult workloads that we see in our lives, but we're
+also used to it being notoriously unreliable. Everyone from
+the layman to the most hardened engineers knows to expect
+bugs in everything from the simplest todo list app to the
+voting machines that power our democracies.
+
+Sometimes software launches with bugs. Sometimes bugs
+appear at the edges that a developer didn't expect.
+Sometimes bugs are introduced as updates break existing
+features in subtle ways. No matter their origin, they're
+happening all the time. Experience helps produce software
+that's more reliable on average, but is rarely enough to
+stem the flow completely.
+
+Only through the application of specially-designed
+practices, techniques, and tooling can we start to really
+improve robustness. The _The Self-hosting Singularity_ aims
+to cover these in detail.
+
 ## Foreword (#foreword)
 
 ### Critical Thought (#critical-thought)
