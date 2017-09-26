@@ -2,6 +2,7 @@ $sans_serif: helvetica, arial, geneva, sans-serif
 $serif: cardo, georgia, serif
 
 $color_highlight: #222
+$color_lowlight: #efefef
 
 $color_primary: #4d4d4d
 $color_secondary: #5d5d5d
@@ -23,14 +24,12 @@ html
     //background-size: 600px 602px
 
   a
+    border-bottom: 1px solid $color_primary
     color: $color_highlight
-    text-decoration: underline
+    text-decoration: none
 
     &:hover
-      text-decoration: none
-
-    &:visited
-      text-decoration: underline
+      border-bottom: 0
 
   /*
    * Headers
@@ -44,7 +43,7 @@ html
     line-height: 1em
 
     a, a:visited
-      text-decoration: none
+      border-bottom: 0
 
   h1
     color: $color_highlight
@@ -200,6 +199,7 @@ html
                 margin-bottom: 6px
 
                 a
+                  border-bottom: 1px solid $color_lowlight
                   color: $color_highlight
 
                 // h4
