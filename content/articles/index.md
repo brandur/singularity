@@ -27,6 +27,8 @@ practices, techniques, and tooling can we start to really
 improve robustness. The _The Self-hosting Singularity_ aims
 to cover these in detail.
 
+<div class="spacer"></div>
+
 ## Foreword (#foreword)
 
 ### Critical Thought (#critical-thought)
