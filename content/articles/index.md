@@ -25,7 +25,7 @@ stem the flow completely.
 Only through the application of specially-designed
 practices, techniques, and tooling can we start to really
 improve robustness. The _The Self-hosting Singularity_ aims
-to cover these in detail.
+to be this guide.
 
 <div class="spacer"></div>
 
