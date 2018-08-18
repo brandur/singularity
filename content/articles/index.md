@@ -34,14 +34,30 @@ on how to do so.
 It will briefly cover some ideas around _why_ software
 fails then talk about values that we should aim to achieve.
 The work's main body will talk about better design of
-software through each aspect of its development:
-[architecting systems](#architect-wisely) more likely to
-succeed, [operating those systems](#operate-defensively) in
-ways to maximize stability, and the [development of
-software](#develop-astutely) that will resist failure and
-entropy.
+software through each aspect of its development: the
+[development of software](#develop-soundly) that will
+resist failure and entropy, [architecting
+systems](#architect-wisely) more likely to succeed, and
+[operating those systems](#operate-defensively) in ways to
+maximize stability.
 
 <div class="spacer"></div>
+
+## Risks (#risks)
+
+TODO
+
+### Time (#time)
+
+TODO
+
+### Entropy (#entropy)
+
+TODO
+
+### Bitrot (#bitrot)
+
+TODO
 
 ## Principles (#principles)
 
@@ -113,19 +129,38 @@ A basic question
 How many people are spending most of their days staving off
 disasters versus working on new things?
 
-## Risks (#risks)
+### The five year test (#five-year)
+
+Clone down a repository five years from now and try to
+build it. What's the likelihood that it will succeed?
+
+## Develop soundly (#develop-soundly)
+
+### Use types (#types)
 
 TODO
 
-### Time (#time)
+### Avoid complexity (#complexity)
 
 TODO
 
-### Entropy (#entropy)
+### Build in layers (#layers)
+
+Packages etc.
 
 TODO
 
-### Bitrot (#bitrot)
+### Use languages that are memory safe (#memory-safe)
+
+### Don't write new software (#new-software)
+
+TODO
+
+### Don't fork software (#forked-software)
+
+TODO
+
+### Use well-maintained software (#maintained-software)
 
 TODO
 
@@ -165,7 +200,7 @@ possible.
 
 TODO
 
-#### Static sites (#static-sites)
+### Use static sites (#static-sites)
 
 Static sites may be the ultimate form of minimalism when it
 comes to web services. They're cheap to run computationally
@@ -180,7 +215,17 @@ the most database-driven service out there can still have
 its company's blog, marketing pages, and status site easily
 made into 
 
-#### Manage lifespans (#manage-lifespans)
+### Design services moderately (#services)
+
+TODO
+
+### Use relational databases and ACID (#databases)
+
+TODO
+
+## Operate defensively (#operate-defensively)
+
+### Manage lifespans (#manage-lifespans)
 
 TODO
 
@@ -188,35 +233,7 @@ TODO
 
 * The Netflix chaos monkey.
 
-### Rational microservices (#rational-microservices)
-
-TODO
-
-## Operate defensively (#operate-defensively)
-
-## Develop astutely (#develop-astutely)
-
-### Use types (#types)
-
-### Use languages that are memory safe (#memory-safe)
-
-### Don't write new software (#new-software)
-
-TODO
-
-### Don't fork existing software (#forked-software)
-
-TODO
-
-### Use well-maintained software (#maintained-software)
-
-## Implementation (#implementation)
-
-TODO
-
-### Dynamic languages (#dynamic-languages)
-
-Consider not using them.
+## Final words (#final-words)
 
 <!--
 # vim: set tw=59:
