@@ -1,8 +1,9 @@
 Software is all around us. It powers the channels we use to
 communicate with friends and family, the grids that
-energize our cities, the probes that we send into deep
-space, and more and more the very homes that we live in.
-With every passing day it eats a little more of our world.
+energize our cities, the transport networks that underpin
+our civilization, the probes that we send into deep space,
+and more and more our very lives and habits. With every
+passing day it eats a little more of our world.
 
 Software is often an intricately-built machine that's made
 up of tens of thousands or even millions of lines of code.
@@ -11,27 +12,40 @@ fragility. We're used to software handling the most
 difficult workloads that we see in our lives, but we're
 also used to it being notoriously unreliable. Everyone from
 the layman to the most hardened engineers knows to expect
-bugs in everything from the simplest todo list app to the
-voting machines that power our democracies.
+bugs in everything from the simplest todo list app all the
+way up to the voting machines that power our democracies.
 
 Sometimes software launches with bugs. Sometimes bugs
 appear at the edges that a developer didn't expect.
 Sometimes bugs are introduced as updates break existing
 features in subtle ways. No matter their origin, they're
-happening all the time. Experience helps produce software
-that's more reliable on average, but is rarely enough to
-stem the flow completely.
+everywhere and appearing all the time. Experience helps
+produce software that's more reliable on average, but it's
+never enough to stem the flow completely.
 
-Only through the application of specially-designed
-practices, techniques, and tooling can we start to really
-improve robustness. The _The Self-hosting Singularity_ aims
-to be this guide.
+We can do better. Eliminating all bugs is impossible, but a
+sizable number are introduced through reckless practices,
+bad tools, and poor design. These broad classes of bugs are
+avoidable, and we should aim to avoid them even if it means
+shifting firmly-concreted mindsets or reevaluating core
+beliefs. The _Self-hosting Singularity_ aims to be a guide
+on how to do so.
+
+It will briefly cover some ideas around _why_ software
+fails then talk about values that we should aim to achieve.
+The work's main body will talk about better design of
+software through each aspect of its development:
+[architecting systems](#architect-wisely) more likely to
+succeed, [operating those systems](#operate-defensively) in
+ways to maximize stability, and the [development of
+software](#develop-astutely) that will resist failure and
+entropy.
 
 <div class="spacer"></div>
 
 ## Foreword (#foreword)
 
-### Critical Thought (#critical-thought)
+### Critical thought (#critical-thought)
 
 Firstly, it's well worthwhile reminding readers of the
 important of critical thought. This is apparently a
@@ -63,11 +77,11 @@ anything wholesale. Re-examing assumptions that are firmly
 concreted into the shared mental landscape at any
 organization may reveal that 
 
-## Introduction (#introduction)
+## Principles (#principles)
 
 Abstract concepts.
 
-### The Walk Away Test (#walk-away-test)
+### The walk away test (#walk-away-test)
 
 Most uninitiated users of Intenet services take stability
 for granted. A website is a website, and opening amazon.com
@@ -126,7 +140,7 @@ heavy reliance on external operations services (like
 Heroku), it's quite possible for them to stay online even
 if their owners are absent for years.
 
-### The Skeleton Crew (#skeleton-crew)
+### The skeleton crew (#skeleton-crew)
 
 A basic question
 
@@ -149,15 +163,15 @@ TODO
 
 TODO
 
-## Techniques (#techniques)
+## Architect wisely (#architect-wisely)
 
 TODO
 
-### Run Less (#run-less)
+### Run less (#run-less)
 
 TODO
 
-### Embrace Ephemerality (#ephemerality)
+### Embrace ephemerality (#ephemerality)
 
 Use services. Don't do anything yourself if you can avoid
 it.
@@ -176,20 +190,23 @@ five years.
 Engineers should have close to an allergic reaction when
 somebody suggests running a new type of component in-house,
 even if it's a technology that's exciting and known to be
-mostly stable (e.g. Kafka).
+mostly stable (e.g. Kafka). There may be a time where it's
+appropriate to do so eventually as your organization and
+uses reach colossal scale, but stave that off as long as
+possible.
 
-### Reduce Moving Parts (#moving-parts)
+### Reduce moving parts (#moving-parts)
 
 TODO
 
-#### Static Sites (#static-sites)
+#### Static sites (#static-sites)
 
 Static sites may be the ultimate form of minimalism when it
 comes to web services. They're cheap to run computationally
 and will handle even the largest volumes of traffic without
 batting an eye. They're also ideal for horizontal scaling
 which makes it especially easy to introduce redundancy into
-the system.
+the system, and perfect for global distribution.
 
 They're obviously not suitable for many cases in that core
 services are likely going to dynamic responses, but even
@@ -197,31 +214,41 @@ the most database-driven service out there can still have
 its company's blog, marketing pages, and status site easily
 made into 
 
-#### Slinky (#slinky)
+#### Manage lifespans (#manage-lifespans)
 
 TODO
 
-### Inject Chaos (#inject-chaos)
+### Inject chaos (#inject-chaos)
 
 * The Netflix chaos monkey.
 
-### Rational Microservices (#rational-microservices)
+### Rational microservices (#rational-microservices)
 
 TODO
 
-### Don't Write New Software (#new-software)
+## Operate defensively (#operate-defensively)
+
+## Develop astutely (#develop-astutely)
+
+### Use types (#types)
+
+### Use languages that are memory safe (#memory-safe)
+
+### Don't write new software (#new-software)
 
 TODO
 
-#### Don't Fork Existing Software (#forked-software)
+### Don't fork existing software (#forked-software)
 
 TODO
+
+### Use well-maintained software (#maintained-software)
 
 ## Implementation (#implementation)
 
 TODO
 
-### Dynamic Languages (#dynamic-languages)
+### Dynamic languages (#dynamic-languages)
 
 Consider not using them.
 
