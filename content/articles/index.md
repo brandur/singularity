@@ -215,7 +215,7 @@ the most database-driven service out there can still have
 its company's blog, marketing pages, and status site easily
 made into 
 
-### Design services moderately (#services)
+### Design services in moderation (#services)
 
 TODO
 
