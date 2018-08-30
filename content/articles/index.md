@@ -51,6 +51,10 @@ TODO
 
 TODO
 
+### Complexity (#complexity)
+
+TODO
+
 ### Entropy (#entropy)
 
 TODO
@@ -140,10 +144,6 @@ build it. What's the likelihood that it will succeed?
 
 TODO
 
-### Avoid complexity (#complexity)
-
-TODO
-
 ### Build in layers (#layers)
 
 Packages etc.
@@ -219,7 +219,11 @@ made into
 
 TODO
 
-### Use relational databases and ACID (#databases)
+### Use ACID databases (#acid)
+
+TODO
+
+### Use relational databases (#relational)
 
 TODO
 
